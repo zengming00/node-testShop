@@ -1,21 +1,20 @@
 # Multer [![Build Status](https://travis-ci.org/expressjs/multer.svg?branch=master)](https://travis-ci.org/expressjs/multer) [![NPM version](https://badge.fury.io/js/multer.svg)](https://badge.fury.io/js/multer) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-Multer ��һ�� node.js �м�������ڴ��� `multipart/form-data` ���ͱ�������, which is primarily used for uploading files. It is written
-on top of [busboy](https://github.com/mscdex/busboy) for maximum efficiency.
+Multer 是一个 node.js 中间件，用于处理 `multipart/form-data` 类型的表单数据, 它主要用于上传文件. 它是写在 [busboy](https://github.com/mscdex/busboy) 之上具有最大效率.
 
-**ע��**: Multer ���ᴦ���κη� `multipart/form-data` ���͵ı�������.
+**注意**: Multer 不会处理任何非 `multipart/form-data` 类型的表单数据.
 
-## ��װ
+## 安装
 
 ```sh
 $ npm install --save multer
 ```
 
-## ʹ��
+## 使用
 
-Multer ����һ�� `body` ���� �Լ� `file` �� `files` ���� �� `request` ������.  `body` ��������������ı�����Ϣ, `file` �� `files` ���������������ϴ����ļ���Ϣ.
+Multer 会添加一个 `body` 对象 以及 `file` 或 `files` 对象 到 `request` 对象中.  `body` 对象包含表单的文本域信息, `file` 或 `files` 对象包含对象表单上传的文件信息.
 
-����ʹ�÷���:
+基本使用方法:
 
 ```javascript
 var express = require('express')
@@ -25,28 +24,28 @@ var upload = multer({ dest: 'uploads/' })
 var app = express()
 
 app.post('/profile', upload.single('avatar'), function (req, res, next) {
-  // req.file �� `avatar` �ļ�����Ϣ
-  // req.body �������ı�������, ������ڵĻ�
+  // req.file 是 `avatar` 文件的信息
+  // req.body 将具有文本域数据, 如果存在的话
 })
 
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {
-  // req.files �� `photos` �ļ��������Ϣ
-  // req.body �������ı�������, ������ڵĻ�
+  // req.files 是 `photos` 文件数组的信息
+  // req.body 将具有文本域数据, 如果存在的话
 })
 
 var cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
 app.post('/cool-profile', cpUpload, function (req, res, next) {
-  // req.files is an object (String -> Array) where fieldname is the key, and the value is array of files
+  // req.files 是一个对象 (String -> Array) 键是文件名, 值是文件数组
   //
-  // e.g.
+  // 例如：
   //  req.files['avatar'][0] -> File
   //  req.files['gallery'] -> Array
   //
-  // req.body �������ı�������, ������ڵĻ�
+  // req.body 将具有文本域数据, 如果存在的话
 })
 ```
 
-In case you need to handle a text-only multipart form, you can use any of the multer methods (`.single()`, `.array()`, `fields()`). Here is an example using `.array()`:
+如果你需要处理一个只有文本域的表单, 你可以使用任何一个 multer 方法 (`.single()`, `.array()`, `fields()`). 这是一个使用 `.array()`的例子:
 
 ```javascript
 var express = require('express')
@@ -55,73 +54,65 @@ var multer  = require('multer')
 var upload = multer()
 
 app.post('/profile', upload.array(), function (req, res, next) {
-  // req.body contains the text fields
+  // req.body 包含文本域
 })
 ```
 
 ## API
 
-### �ļ���Ϣ
+### 文件信息
 
-ÿ���ļ������������Ϣ:
+每个文件具有下面的信息:
 
 Key | Description | Note
 --- | --- | ---
-`fieldname` | Field name �ɱ���ָ�� |
-`originalname` | Name of the file on the user's computer |
-`encoding` | Encoding type of the file |
-`mimetype` | Mime type of the file |
-`size` | Size of the file in bytes |
-`destination` | The folder to which the file has been saved | `DiskStorage`
-`filename` | The name of the file within the `destination` | `DiskStorage`
-`path` | The full path to the uploaded file | `DiskStorage`
-`buffer` | A `Buffer` of the entire file | `MemoryStorage`
+`fieldname` | Field name 由表单指定 |
+`originalname` | 用户计算机上的文件的名称 |
+`encoding` | 文件编码 |
+`mimetype` | 文件的 Mime 类型 |
+`size` | 文件大小（字节单位） |
+`destination` | 保存路径 | `DiskStorage`
+`filename` | 保存在`destination`中的文件名 | `DiskStorage`
+`path` | 已上传文件的完整路径 | `DiskStorage`
+`buffer` | 一个存放了整个文件的 `Buffer`  | `MemoryStorage`
 
 ### `multer(opts)`
 
-Multer accepts an options object, the most basic of which is the `dest`
-property, which tells Multer where to upload the files. In case you omit the
-options object, the files will be kept in memory and never written to disk.
+Multer 接受一个 options 对象, 其中最基本的是 `dest`
+属性, 这将告诉 Multer 将上传文件保存在哪. 如果你省略 options 对象, 这些文件将保存在内存中，永远不会写入磁盘。
 
-By default, Multer will rename the files so as to avoid naming conflicts. The
-renaming function can be customized according to your needs.
+为了避免命名冲突, Multer 会修改上传的文件名. 这个重命名功能可以根据您的需要定制。
 
-The following are the options that can be passed to Multer.
+以下是可以传递给Multer的选项.
 
 Key | Description
 --- | ---
-`dest` or `storage` | Where to store the files
-`fileFilter` | Function to control which files are accepted
-`limits` | Limits of the uploaded data
+`dest` or `storage` | 在哪里存储文件
+`fileFilter` | 文件过滤器，控制哪些文件可以被接受
+`limits` | 限制上传的数据
 
-In an average web app, only `dest` might be required, and configured as shown in
-the following example.
+通常, 只需要设置 `dest` 属性
+像这样：
 
 ```javascript
 var upload = multer({ dest: 'uploads/' })
 ```
 
-If you want more control over your uploads, you'll want to use the `storage`
-option instead of `dest`. Multer ships with storage engines `DiskStorage`
-and `MemoryStorage`; More engines are available from third parties.
+如果你想在上传时进行更多的控制, 你可以使用`storage`选项替代`dest`. Multer 具有 `DiskStorage` 和 `MemoryStorage` 两个存储引擎; 另外还可以从第三方获得更多可用的引擎.
 
 #### `.single(fieldname)`
 
-Accept a single file with the name `fieldname`. The single file will be stored
-in `req.file`.
+接受一个以 `fieldname` 命名的文件. 这个文件的信息保存在 `req.file`.
 
 #### `.array(fieldname[, maxCount])`
 
-Accept an array of files, all with the name `fieldname`. Optionally error out if
-more than `maxCount` files are uploaded. The array of files will be stored in
-`req.files`.
+接受一个以 `fieldname` 命名的文件数组. 可以配置 `maxCount` 来限制上传的最大数量. 这些文件的信息保存在 `req.files`.
 
 #### `.fields(fields)`
 
-Accept a mix of files, specified by `fields`. An object with arrays of files
-will be stored in `req.files`.
+接受指定 `fields` 的混合文件. 这些文件的信息保存在 `req.files`.
 
-`fields` should be an array of objects with `name` and optionally a `maxCount`.
+`fields` 应该是一个对象数组，应该具有 `name` 和可选的 `maxCount`属性.
 Example:
 
 ```javascript
@@ -133,24 +124,20 @@ Example:
 
 #### `.none()`
 
-Accept only text fields. If any file upload is made, error with code
-"LIMIT\_UNEXPECTED\_FILE" will be issued. This is the same as doing `upload.fields([])`.
+只接受文本域. 如果任何文件上传到这个模式, 将发生 "LIMIT\_UNEXPECTED\_FILE" 错误. 这和 `upload.fields([])` 的效果一样.
 
 #### `.any()`
 
-Accepts all files that comes over the wire. An array of files will be stored in
-`req.files`.
+接受一切. 文件数组将保存在 `req.files`.
 
-**WARNING:** Make sure that you always handle the files that a user uploads.
-Never add multer as a global middleware since a malicious user could upload
-files to a route that you didn't anticipate. Only use this function on routes
-where you are handling the uploaded files.
+**警告:** 确保你总是处理了用户的文件上传.
+永远不要将multer作为全局中间件使用，因为恶意用户可以上传文件到一个你没有预料到的路由，应该只在你需要处理上传文件的路由上使用.
 
 ### `storage`
 
 #### `DiskStorage`
 
-The disk storage engine gives you full control on storing files to disk.
+磁盘存储引擎可以让你控制文件的存储.
 
 ```javascript
 var storage = multer.diskStorage({
@@ -165,95 +152,76 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 ```
 
-There are two options available, `destination` and `filename`. They are both
-functions that determine where the file should be stored.
+有两个选项可用, `destination` 和 `filename`. 他们都是用来确定文件存储位置的函数。
 
-`destination` is used to determine within which folder the uploaded files should
-be stored. This can also be given as a `string` (e.g. `'/tmp/uploads'`). If no
-`destination` is given, the operating system's default directory for temporary
-files is used.
+`destination` 是用来确定上传的文件应该存储在哪个文件夹中. 也可以提供一个 `string` (例如 `'/tmp/uploads'`). 如果没有设置 `destination` , 则使用操作默认的临时文件夹
 
-**Note:** You are responsible for creating the directory when providing
-`destination` as a function. When passing a string, multer will make sure that
-the directory is created for you.
+**注意:** 如果你提供的 `destination` 是一个函数，你需要负责创建文件夹. 当提供一个字符串, multer 将确保这个文件夹是你创建的.
 
-`filename` is used to determine what the file should be named inside the folder.
-If no `filename` is given, each file will be given a random name that doesn't
-include any file extension.
+`filename` 用于确定文件夹中的文件名的确定。 如果没有设置`filename` , 每个文件将设置为一个随机文件名，并且是没有扩展名的 
 
-**Note:** Multer will not append any file extension for you, your function
-should return a filename complete with an file extension.
+**注意:** Multer 不会为你添加任何扩展名, 你的程序应该返回一个完整的文件名.
 
-Each function gets passed both the request (`req`) and some information about
-the file (`file`) to aid with the decision.
+每个函数都传递了两个请求(`req`) 和一些关于这个文件的信息 (`file`) 有助于你的决定。
 
-Note that `req.body` might not have been fully populated yet. It depends on the
-order that the client transmits fields and files to the server.
+注意 `req.body` 可能还没有完全填充.这取决于向客户端发送字段和文件到服务器的顺序。
 
 #### `MemoryStorage`
 
-The memory storage engine stores the files in memory as `Buffer` objects. It
-doesn't have any options.
+内存存储引擎将文件存储在内存中的 `Buffer` 对象. 它没有任何选项
 
 ```javascript
 var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
 ```
 
-When using memory storage, the file info will contain a field called
-`buffer` that contains the entire file.
+当使用内存存储引擎, 文件信息将包含一个 `buffer` 字段，里面包含了整个文件数据.
 
-**WARNING**: Uploading very large files, or relatively small files in large
-numbers very quickly, can cause your application to run out of memory when
-memory storage is used.
+**警告**: 当你使用内存存储，上传非常大的文件, 或者非常多的小文件, 会导致你的应用程序内存溢出
 
 ### `limits`
+一个对象，指定一些数据大小的限制。 Multer 通过这个对象使用 busboy , 详细的特性可以在 [busboy's page](https://github.com/mscdex/busboy#busboy-methods) 找到.
 
-An object specifying the size limits of the following optional properties. Multer passes this object into busboy directly, and the details of the properties can be found on [busboy's page](https://github.com/mscdex/busboy#busboy-methods).
-
-The following integer values are available:
+可以使用下面这些:
 
 Key | Description | Default
 --- | --- | ---
-`fieldNameSize` | Max field name size | 100 bytes
-`fieldSize` | Max field value size | 1MB
-`fields` | Max number of non-file fields | Infinity
-`fileSize` | For multipart forms, the max file size (in bytes) | Infinity
-`files` | For multipart forms, the max number of file fields | Infinity
-`parts` | For multipart forms, the max number of parts (fields + files) | Infinity
+`fieldNameSize` | field 名字最大长度 | 100 bytes
+`fieldSize` | field 值的最大长度  | 1MB
+`fields` | 非文件 field 的最大数量 | 无限
+`fileSize` | 在multipart表单中, 文件最大长度 (字节单位) | 无限
+`files` | 在multipart表单中, 文件最大数量 | 无限
+`parts` | 在multipart表单中, part传输的最大数量(fields + files) | 无限
 `headerPairs` | For multipart forms, the max number of header key=>value pairs to parse | 2000
 
-Specifying the limits can help protect your site against denial of service (DoS) attacks.
+设置 limits 可以帮助保护你的站点免受拒绝服务 (DoS) 攻击.
 
 ### `fileFilter`
-
-Set this to a function to control which files should be uploaded and which
-should be skipped. The function should look like this:
+设置一个函数来控制什么文件可以上传以及什么文件应该跳过，这个函数应该看起来像这样：
 
 ```javascript
 function fileFilter (req, file, cb) {
 
-  // The function should call `cb` with a boolean
-  // to indicate if the file should be accepted
+  // 这个函数应该调用 `cb` 用boolean值来
+  // 指示是否应接受该文件
 
-  // To reject this file pass `false`, like so:
+  // 拒绝这个文件，使用`false`, 像这样:
   cb(null, false)
 
-  // To accept the file pass `true`, like so:
+  // 接受这个文件，使用`true`, 像这样:
   cb(null, true)
 
-  // You can always pass an error if something goes wrong:
+  // 如果有问题，你可以总是这样发送一个错误:
   cb(new Error('I don\'t have a clue!'))
 
 }
 ```
 
-## ����������
+## 错误处理机制
 
-When encountering an error, multer will delegate the error to express. You can
-display a nice error page using [the standard express way](http://expressjs.com/guide/error-handling.html).
+当遇到一个错误, multer 将会把错误发送给 express. 你可以使用一个比较好的错误展示页 ([express标准方式](http://expressjs.com/guide/error-handling.html)).
 
-If you want to catch errors specifically from multer, ������Լ������м������.
+如果你想捕捉multer发出的错误, 你可以自己调用中间件程序.
 
 ```javascript
 var upload = multer().single('avatar')
@@ -261,18 +229,18 @@ var upload = multer().single('avatar')
 app.post('/profile', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
-      // ��������
+      // 发生错误
       return
     }
 
-    // Everything went fine
+    // 一切都好
   })
 })
 ```
 
-## ���ƴ洢����
+## 定制存储引擎
 
-See [the documentation here](/StorageEngine.md) �������Ҫ�����Լ��Ĵ洢����.
+如果你想要构建自己的存储引擎，请看 [这里](/StorageEngine.md) .
 
 ## License
 
