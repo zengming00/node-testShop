@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 
 var uri = 'mongodb://zengming:zengming@ds047146.mlab.com:47146/zengming';
 
