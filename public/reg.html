@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册用户</title>
+<style type="text/css">
+table{
+	margin:auto;
+}
+td{
+	padding:5px 10px;
+	border:1px solid #666;
+}
+input{
+	color: black !important;
+}
+input[type='text'],input[type='password']{
+	width:15em;
+}
+.center {
+	width: 50%;
+	height: 50%;
+	overflow: auto;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+}
+</style>
+<script type="text/javascript">
+	function response(){
+		if (this.readyState==4 && this.status==200){
+			var txt = this.responseText;
+			if(txt == "注册成功"){
+				alert(txt);
+				location.assign('./');				
+			}else{
+				alert(this.responseText);
+			}
+		}
+	}
+	
+	function submitForm(){
+		//找到所有元素
+		var username = document.getElementsByName('username')[0];
+		var email = document.getElementsByName('email')[0];
+		var password = document.getElementsByName('password')[0];
+		var repassword = document.getElementsByName('repassword')[0];
+		var phone = document.getElementsByName('phone')[0];
+		//提交前检查
+		if(checkUsername(username) && checkEmail(email) && checkPhone(phone) && checkPassword(password) && checkRepassword(repassword)){
+		}else{
+			alert("输入不合法");
+			return;
+		}
+		var obj = {//构造提交数据
+				'username' : username.value,
+				'email' : email.value,
+				'password' : password.value,
+				'repassword' : repassword.value,
+				'phone' : phone.value,
+		};
+		var data = '';
+		for(var k in obj){
+			data += k + '=' + encodeURIComponent(obj[k])+'&';
+		}
+		var xmlhttp;
+		if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		  	xmlhttp=new XMLHttpRequest();
+		}else{// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=response;
+		xmlhttp.open("POST","/users/regUser",true);
+		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xmlhttp.send(data);
+	}
+	function checkRepassword(input){
+		var pwd = document.getElementsByName('password')[0];
+		if(checkPassword(pwd)){//检查第一次输入
+			if(input.value == pwd.value){
+				input.style.background="white";
+				return true;
+			}else{
+				input.style.background="#faa";
+			}
+		}
+		return false;
+	}
+	function checkPassword(input){
+		var pat = /^[a-zA-Z0-9]{6,16}$/;
+		return check(pat,input);
+	}
+	function checkEmail(input){
+		var pat = /^[a-zA-z0-9]+@[a-zA-z0-9]+(\.[a-zA-z0-9]+)+$/;
+		return check(pat,input);
+	}
+	function checkPhone(input){
+		var pat = /^(13[0-9]|14[5|7]|15\d|18\d)\d{8}$/;
+		return check(pat,input);
+	}
+	function checkUsername(input){
+		var pat = /^[a-zA-Z0-9]{1,16}$/;
+		return check(pat,input);
+	}
+	function check(pat,input){
+		if(!pat.test(input.value)){
+			input.style.background="#faa";
+			return false;
+		}else{
+			input.style.background="white";
+			return true;
+		}
+	}
+</script>
+</head>
+<body>
+	<div class="center">
+		<form method="post" onsubmit="return false">
+			<table>
+				<tr>
+					<td>用户名：</td>
+					<td><input type="text" name="username" onblur="checkUsername(this)"/> 英文或数字最多16位</td>
+				</tr>
+				<tr>
+					<td>邮箱：</td>
+					<td><input type="text" name="email" onblur="checkEmail(this)"/> 方便取回密码</td>
+				</tr>
+				<tr>
+					<td>手机：</td>
+					<td><input type="text" name="phone" onblur="checkPhone(this)"/> 方便取回密码</td>
+				</tr>
+				<tr>
+					<td>设置密码：</td>
+					<td><input type="password" name="password" onblur="checkPassword(this)"/> 英文或数字6-16位</td>
+				</tr>
+				<tr>
+					<td>确认密码：</td>
+					<td><input type="password" name="repassword" onblur="checkRepassword(this)"/> </td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" value="注册" onclick="submitForm()"/>
+						<a href="/" style="float:right">返回首页</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

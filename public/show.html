@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Build CRUD DataGrid with jQuery EasyUI - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/bootstrap/easyui.css">
+	<link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="jquery-easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#dg').datagrid({
+				url: '/users/getUsers',
+			});
+		});
+	</script>
+</head>
+<body>
+	<table id="dg" title="My Users" style="min-height:250px" pagination="true" idField="id"
+			rownumbers="true" fitColumns="true" singleSelect="true">
+		<thead>
+			<tr>
+				<th field="id" width="50">ID</th>
+				<th field="username" width="50" >用户名</th>
+				<th field="password" width="50" >密码</th>
+				<th field="phone" width="50" >手机</th>
+				<th field="email" width="50" >邮箱</th>
+			</tr>
+		</thead>
+	</table>
+	
+</body>
+</html>

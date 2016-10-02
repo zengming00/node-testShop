@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>拼图前端框架跨屏响应式模板</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="stylesheets/pintuer.css">
+    <link rel="stylesheet" href="stylesheets/animate.min.css">
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/pintuer.js"></script>
+    <script src="javascripts/respond.js"></script>
+</head>
+<body>
+
+<form onsubmit="return false;"><div class="form-group" id="f_1475324796001">
+    <div class="label">
+        <label for="f_username_txt">
+            用户名/账号
+        </label>
+    </div>
+    <div class="field">
+        <input type="text" class="input" id="f_username_txt" name="f_username_txt" maxlength="50" value="" data-validate="required:请填写用户名/账号,username:请输入英文字母开头的字母、下划线、数字,ajax#(demo/getdata.html?username={value}):该账号已存在,length#<50:字数在0-50个" placeholder="英文字母开头的字母、下划线、数字">
+    </div>
+</div><div class="form-group" id="f_1475324804143">
+    <div class="label">
+        <label for="f_password_txt">
+            密码
+        </label>
+    </div>
+    <div class="field">
+        <input type="text" class="input" id="f_password_txt" name="f_password_txt" maxlength="50" value="" data-validate="required:请填写密码,username:请输入英文字母开头的字母、下划线、数字,length#<50:字数在0-50个" placeholder="英文字母开头的字母、下划线、数字">
+        <div class="input-help"><ul><li>请填写密码</li><li>请输入英文字母开头的字母、下划线、数字</li></ul></div></div>
+</div><div class="form-group" id="f_1475324823558">
+    <div class="label">
+        <label for="f_passwordok_txt">
+            确认密码
+        </label>
+    </div>
+    <div class="field">
+        <input type="text" class="input" id="f_passwordok_txt" name="f_passwordok_txt" maxlength="50" value="" data-validate="required:请填写密码,username:请输入英文字母开头的字母、下划线、数字,repeat#f_password_txt:两次输入的密码不一致，请检查,length#<50:字数在0-50个" placeholder="英文字母开头的字母、下划线、数字">
+    </div>
+</div><div class="form-group" id="f_1475324844245">
+    <div class="alert alert-red">
+        <span class="close rotate-hover"></span><strong>操作失败</strong>
+        <p>
+            请重新操作。
+        </p>
+        <button class="button bg-red">
+            确认
+        </button>
+        <button class="button bg-yellow form-reset" type="reset">
+            重设
+        </button>
+    </div>
+</div><div class="form-group" id="f_1475324850066">
+    <div class="alert alert-green">
+        <span class="close rotate-hover"></span><strong>恭喜：</strong>操作成功。
+    </div>
+</div></form>
+
+</body>
+</html>

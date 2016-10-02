@@ -13,6 +13,9 @@
     "express": "~4.13.4",
     "mongoose": "^4.6.1",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
+    "mysql": "^2.11.1",
+    "redis": "^2.6.2",
+    "serve-favicon": "~2.3.0",
+    "session-file-store": "^0.2.1"
   }
 }
