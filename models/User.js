@@ -9,7 +9,7 @@ var conn = mysql.createConnection({
     database: 'test'
 });
 conn.on('error', function(err) {
-    console.log(err);
+    console.log(__filename, err.message);
 });
 
 var sql = 'CREATE TABLE IF NOT EXISTS users(\
