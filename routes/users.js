@@ -17,21 +17,21 @@ router.post('/regUser', function (req, res) {
     var $phone = req.body.phone;
 
     if (!/^(13[0-9]|14[5|7]|15\d|18\d)\d{8}$/.test($phone)) {
-        return res.send("ÊÖ»úºÅ²»ºÏ·¨");
+        return res.send("æ‰‹æœºå·ä¸åˆæ³•");
     }
     if (!/^[a-zA-Z0-9]{1,16}$/.test($username)) {
-        return res.send("ÓÃ»§Ãû²»·ûºÏ¹æ¶¨");
+        return res.send("ç”¨æˆ·åä¸ç¬¦åˆè§„å®š");
     }
     if (!/^[a-zA-z0-9]+@[a-zA-z0-9]+(\.[a-zA-z0-9]+)+$/.test($email)) {
-        return res.send("ÓÊÏä¸ñÊ½²»·ûºÏ¹æ¶¨");
+        return res.send("é‚®ç®±æ ¼å¼ä¸ç¬¦åˆè§„å®š");
     }
     if (!/^[a-zA-Z0-9]{6,16}$/.test($password)) {
-        return res.send("ÃÜÂë²»·ûºÏ¹æ¶¨");
+        return res.send("å¯†ç ä¸ç¬¦åˆè§„å®š");
     } else if ($password !== $repassword) {
-        return res.send("Á½´ÎÃÜÂë²»Ò»ÖÂ");
+        return res.send("ä¸¤æ¬¡å¯†ç ä¸ä¸€è‡´");
     }
     UserModel.regUser($username, $password, $phone, $email).then(function () {
-        res.send("×¢²á³É¹¦");//Ç°Ì¨ajaxÊÕµ½Ok²ÅÌáÊ¾³É¹¦
+        res.send("æ³¨å†ŒæˆåŠŸ");//å‰å°ajaxæ”¶åˆ°Okæ‰æç¤ºæˆåŠŸ
     }).catch(function (e) {
         console.log(e);
     });

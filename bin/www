@@ -5,6 +5,7 @@
  */
 
 var app = require('../app');
+var chat = require('../chat');
 var debug = require('debug')('test:server');
 var http = require('http');
 
@@ -28,6 +29,8 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+chat.io.attach(server);
 
 /**
  * Normalize a port into a number, string, or false.

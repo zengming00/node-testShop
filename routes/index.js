@@ -3,6 +3,13 @@ var Demo = require('../models/model');
 
 var router = express.Router();
 
+router.get('/captcha', function(req, res, next){
+    var captcha = require('ascii-captcha');
+    var pre = '<pre style="font-size:3px;line-height:2px;">\r\n'
+        + captcha.word2Transformedstr(captcha.generateRandomText(5))
+        + '</pre>';
+    res.send(pre);
+});
 
 // 首页
 router.get('/', function(req, res, next) {
