@@ -29,17 +29,12 @@
         </tr>
     </table>
 </form>
-<script src="javascripts/socket.io-1.4.8.js"></script>
-<script src="javascripts/jquery.js"></script>
+
+<script src="https://zengming.herokuapp.com/javascripts/jquery.js"></script>
 <script>
-    var socket = io('https://<%=host%>');
-    $('form').submit(function(){
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
+    $('form').submit(function () {
+        $('#messages').append($('<li>').text($('#m').val()));
         return false;
-    });
-    socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
     });
 </script>
 </body>
