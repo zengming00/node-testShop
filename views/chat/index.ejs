@@ -39,6 +39,10 @@
         $('#m').val('');
         return false;
     });
+    socket.on('connect', function () {
+        console.log(arguments);
+        $('#messages').append($('<li>').text('connect'));
+    })
     socket.on('chat message', function(msg){
         $('#messages').append($('<li>').text(msg));
     });
