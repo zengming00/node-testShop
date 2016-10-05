@@ -40,11 +40,12 @@
         return false;
     });
     socket.on('connect', function () {
-        console.log(arguments);
-        $('#messages').append($('<li>').text('connect'));
+        $('#messages').append($('<li>').text('connect success!'));
+        $('#d1').scrollTop( $('#d1')[0].scrollHeight );
     })
     socket.on('chat message', function(msg){
         $('#messages').append($('<li>').text(msg));
+        $('#d1').scrollTop( $('#d1')[0].scrollHeight );
     });
 </script>
 
