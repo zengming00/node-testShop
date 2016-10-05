@@ -5,7 +5,7 @@ var router = express.Router();
 
 // 首页
 router.get('/', function(req, res, next) {
-	var host = req.hostname;//+':'+req.app.get('port');
+	var host = req.protocol + '://' + req.hostname;  //+':'+req.app.get('port');
     res.render('chat/index',{host: host});
 });
 

@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-<div class="center" style="border: 1px solid red;height: 300px;overflow: auto;">
+<div class="center" id="d1" style="border: 1px solid red;height: 300px;overflow:scroll;overflow-x:hidden;">
     <p><%=host%></p>
     <ul id="messages"></ul>
 </div>
@@ -34,6 +34,7 @@
 <script>
     $('form').submit(function () {
         $('#messages').append($('<li>').text($('#m').val()));
+        $('#d1').scrollTop( $('#d1')[0].scrollHeight );
         return false;
     });
 </script>
