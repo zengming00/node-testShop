@@ -22,7 +22,7 @@
 <script src="javascripts/socket.io-1.4.8.js"></script>
 <script src="javascripts/jquery.js"></script>
 <script>
-    var socket = io('http://<%=host%>');
+    var socket = io('https://<%=host%>');
     $('form').submit(function(){
         socket.emit('chat message', $('#m').val());
         $('#m').val('');
