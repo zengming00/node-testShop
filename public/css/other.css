@@ -1,0 +1,82 @@
+/*loading.html*/
+@charset "utf-8";
+.loading {text-align:left; margin:0 auto; width:992px !important; width:1002px; padding-left:10px;}
+.loading a{ color:#464646;}
+.loading a:hover{text-decoration:underline;color:#960a0b;}
+.loading a:visited{}
+
+.loading .loading_middle {border:1px solid #c8c8c8; margin-top:10px;width:467px; float:left; margin-left:13px;!important; *margin-left:13px !important; _margin-left:13px;}
+    .loading_middle_r .ddan {background-image:url(../images/Account11.gif); height:30px; font-size:14px; font-weight:bold; color:#FFF;
+ line-height:30px; background-color: #A4A3A3; background-position: 10px 50%; background-repeat: no-repeat; padding: 0 20px;}
+	.loading_middle_m {margin-top:10px;  background:url(../images/loading09.gif) bottom repeat-x; padding-bottom:30px;}
+		.loading_middle_m .wzi {color:#000000; line-height:30px}
+		.loading_middle_m .wzi input{ border:1px solid #ccc; height:20px; line-height:20px; width:150px}
+			.loading_middle_m .wzi_g{ margin-left:98px;}
+			.loading_middle_m .wzi_g1{ margin-left:38px;}
+		.loading_middle_m .wzix {color:#000000; line-height:30px; margin-left:158px; width:290px;}
+			.loading_middle_m .wzix span{color:#666; line-height:25px; padding-left:10px}
+
+
+
+/*help.html*/
+.help {text-align:left; margin:0 auto; width:992px !important; width:1002px; padding-left:10px;}
+.help a{text-decoration:none; color:#464646;}
+.help a:hover{text-decoration:underline;color:#464646;}
+.help a:visited{color:#464646;}
+	
+.help_middle_l {margin-top:10px; float:left;}
+	.help_middle_lt{ width:198px; border:1px solid #c8c8c8;}
+		.help_middle_lt .bt { line-height:26px;font-size:14px; font-weight:bold; color:#000;background-image:url(../images/help03.gif);height:25px;background-repeat:no-repeat;}
+		  		.help_middle_lt ul{margin-left:15px;margin-top:5px;line-height:30px;color:#464646;}
+					.help_middle_lt ul li{background-image:url(../images/Account25.gif);background-repeat:no-repeat;background-position: 2px 50%;padding: 0 10px;}
+        .help_middle_lt .lxi{ margin-left:30px; padding-top:3px;}
+	
+
+.help_middle_r {float:left;width:768px;  margin-left:13px; margin-top:10px;}
+	.help_middle_r .xiangxi{margin-top:15px;}
+			.help_middle_r .xiangxi .nume{ background:url(../images/help11.gif) no-repeat;background-position: 20px 50%;padding: 0 35px;font-size:14px;color:#464646;font-weight:bold;}
+				.help .help_middle .help_middle_r .xiangxi ul li{
+	background:url(../images/Account25.gif) no-repeat;
+	background-position: 20px 50%;
+	padding: 0 10px;
+	font-size:12px;
+	color:#464646;
+	float:left;
+	margin-left:10px;
+}
+
+
+
+/*login.html*/
+.Login {text-align:left; margin:0 auto; width:992px !important; width:1002px; padding-left:10px;}
+.Login a{color:#464646;}
+.Login a:hover{text-decoration:underline;color:#960a0b;}
+.Login a:visited{}
+	
+
+.Login .Login_middle {border:1px solid #c8c8c8;width:985px;margin: 10px auto;}
+	 .Login_middle_r .ddan {background:url(../images/Account11.gif) no-repeat;height:30px;font-size:14px;font-weight:bold;color:#FFF;	line-height:30px;background-color: #A4A3A3;background-position: 10px 50%;padding: 0 20px;}
+		.Login_middle_m {width:470px;margin: 10px auto;}
+				.Login_middle_m .wzi { color:#000000; line-height:30px;}
+				.Login_middle_m .wzix {color:#666666;line-height:20px; margin-left:140px;}
+				.Login_middle_m .di {margin-bottom:30px;}
+.Login_middle p center .ddan_f img{margin-top:20px; margin-left:0px;}
+
+
+/*account.html*/
+.account {text-align:left; margin:0 auto; width:1002px; padding-left:10px;}
+.account a{color:#464646;}
+.account a:hover{text-decoration:underline;color:#960a0b;}
+.account a:visited{}
+	
+
+.account_middle_l { width:200px; border:1px solid #c8c8c8;margin-top:10px; float:left;}
+		.account_middle_l .bt {background-color:#c93526;background-image:url(../images/Account8.gif);background-position: 10px 50%;background-repeat: no-repeat;padding: 0 23px;height:25px;font-size:14px;color:#FFF;line-height:25px;font-weight:bold;}
+				.account_middle_l .bt_f {background:url(../images/Account24.gif) no-repeat;width:130px;height:24px;font-size:12px;	color:#464646;line-height:22px;	margin:10px 0 10px 13px;padding-left:20px;background-color: #f9e4c6;background-repeat:no-repeat;	background-position: 10px 50%;padding: 0 23px;}
+				.account_middle_l .bt_z { background:url(../images/Account25.gif) no-repeat;width:130px;height:24px;font-size:12px;color:#464646;line-height:22px;margin:10px 0 10px 13px;padding-left:20px;background-color:#f3f3f3;background-position: 10px 50%;padding: 0 23px;}
+	
+	.account_middle_r {float: left;	width: 778px; border:1px solid #c8c8c8; margin-left: 13px; margin-top:10px;}
+		.account_middle_r .ddan {background-image:url(../images/Account11.gif);height:30px;font-size:14px;	font-weight:bold;color:#FFF;line-height:30px;background-color: #a4a3a3;background-repeat: no-repeat;background-position: 10px 50%;padding: 0 23px;}
+		.account_middle .account_middle_r .ddan_m{background-image:url(../images/Account18.gif);width:98%;	height:30px;margin:20px 0 10px 8px;}
+
+  .account .account_middle .ddan_f center img{ margin-top:10px;}

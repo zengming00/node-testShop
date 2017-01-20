@@ -21,10 +21,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.locals.__dirname = __dirname;//全局可以通过req.app.locals访问到
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/chat', require('./routes/chat'));
+app.use('/page', require('./routes/page'));
+
+app.use('/Admin', require('./routes/Admin/app'));
+//app.use('/Admin', express.static(path.join(__dirname, 'views/Admin/Index')));//会连ejs等文件也暴露出去
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,22 @@
+<foreach name="tree" item="t">
+                <if condition="$t['parent_id'] eq 0">
+                <div>
+                    <span class="left">
+                        <a href="{:U('Home/Index/category', array('cat_id'=>$t['cat_id']))}">
+                            {$t.cat_name}
+                        </a>
+                    </span>
+                    <span class="right subnav_right">
+                        <img src="__PUBLIC__/images/line.gif" border="0" id="categorie_ico1">
+                    </span>
+                </div>
+				<else/>
+                <ul>
+                    <li>&nbsp;
+                        <a href="{:U('Home/Index/category', array('cat_id'=>$t['cat_id']))}">
+                            {$t.cat_name}
+                        </a>
+                    </li>
+                </ul>
+                </if>
+</foreach>

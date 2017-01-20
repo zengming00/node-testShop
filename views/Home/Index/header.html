@@ -1,0 +1,107 @@
+<div id="header">
+        <div class="header_top">
+            <div class="header_top_l">
+            </div>
+            <div class="header_top_m">
+                <div style='float:left' id="ECS_MEMBERZONE">
+                    欢迎光临本店　　　　
+                    <a href="javascript:void()">
+                        会员登录
+                    </a>
+                    |
+                    <a href="javascript:void()">
+                        免费注册
+                    </a>
+                    <label id="myaccount">
+                        <a href="javascript:void()">
+                            我的帐户
+                        </a>
+                    </label>
+                    <label id="helpcenter">
+                        <a href="javascript:void()">
+                            帮助中心
+                        </a>
+                    </label>
+                </div>
+                <div style='float:right'>
+                    <label id="collect">
+                        <a href="javascript:void()">
+                            加入收藏
+                        </a>
+                    </label>
+                    <label id="sethome">
+                        <a href="{:U('Admin/Index/index')}" >
+                            后台管理
+                        </a>
+                    </label>
+                </div>
+                <div class='clear'>
+                </div>
+            </div>
+            <div class="header_top_r">
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="logo">
+            <a href="javascript:void()">
+                <img src="__PUBLIC__/images/logo.gif">
+            </a>
+        </div>
+        <div class="header_intro">
+            <img src="__PUBLIC__/images/by_top.gif">
+        </div>
+        <div class="headerdg">
+            <em>
+                抢购热线（全天24小时）
+            </em>
+            <p>
+                <img src="__PUBLIC__/images/tel1.gif">
+            </p>
+        </div>
+    </div>
+    <div id="nav">
+        <div class="nav_m">
+            <ul>
+                <li>
+                    <a href="{:U('Home/Index/index')}">
+                        首页
+                    </a>
+                </li>
+       <foreach name="tree" item="t">
+       		<if condition="$t['parent_id'] eq 0">
+                <li>
+                    <a href="{:U('Home/index/category', array('cat_id'=>$t['cat_id']))}" id="">
+                        {$t.cat_name}
+                    </a>
+                </li>
+            </if>
+       </foreach>
+                <li>
+                    <a href="javascript:void()">
+                        留言板
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <DIV class="navr_recent">
+            <SPAN class="navr_recent_l1">
+                　
+            </SPAN>
+            <A onmousedown="bubble(event);" href="javascript:void()" name="myliulan">
+                <a href="javascript:void()" title="查看购物车">
+                    <a href="javascript:void()" title="查看购物车">
+                        您的购物车中有 0 件商品，总计金额 ￥0.00元。
+                    </a>
+                </a>
+            </A>
+            <EM>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            </EM>
+        </DIV>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="nav_min_div" id="min_div">
+        <img src="__PUBLIC__/images/top_min.jpg">
+    </div>

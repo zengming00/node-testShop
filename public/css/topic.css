@@ -1,0 +1,13 @@
+.dinggou{background:url(../images/dg.gif) no-repeat; padding-top:50px; padding-bottom:50px}
+.dg_tbl{margin-top:20px}
+.dg_input{ width:200px}
+.dg_tbl_notice{ padding-left:170px; margin-top:10px}
+.quick_submit{ background:url(../images/8800_110.gif); width:327px; height:27px; cursor:pointer; border:0px; margin-top:30px}
+.dinggou_w{width:788px; margin-left:120px; text-align:center}
+.dinggou_l, .dinggou_r{ float:left; height:30px; line-height:30px;}
+.dinggou_l{ width:132px; text-align:right; padding-right:4px;}
+.dinggou_r{ width:616px; padding-left:4px; text-align:left}
+	
+.other{ margin-top:15px; margin-left:10px}
+.other ul li{float:left; width:235px; text-align:center; padding-bottom:10px}
+.other ul li img{border:1px solid #fff;}
