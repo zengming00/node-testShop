@@ -36,16 +36,19 @@ CatModel.getTree = function getTree($rows, $pid, $level){
  }
 
 CatModel.getFamily = function getFamily($rows, $catid){
-     var $arr =[], k, row;
+     var $arr =[], k, row, isFind;
      while($catid != 0){
+         isFind = false;
          for(k in $rows){
              row = $rows[k];
-             if(row._id == $catid){
+             if(row._id.toString() == $catid){
                  $arr.unshift(row);
                  $catid=row.parent_id;
+                 isFind = true;//避免死循环
                  break;
              }
          }
+         if(!isFind) break;
      }
      return $arr;
  }

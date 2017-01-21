@@ -142,6 +142,7 @@ h1 .action-span1 {
 .list-div td.first-cell{
   font-weight: bold;
   padding-left: 10px;
+  text-align:center;
 }
 
 .list-div input {

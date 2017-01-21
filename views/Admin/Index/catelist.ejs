@@ -11,7 +11,7 @@
 
 <h1>
 <span class="action-span"><a href="cateadd">添加分类</a></span>
-<span class="action-span1"><a href="javascript:void()">ECSHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 商品分类 </span>
+<span class="action-span1"><a href="javascript:void(0)">ECSHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 商品分类 </span>
 <div style="clear:both"></div>
 </h1>
 <form method="post" action="" name="listForm">
@@ -35,10 +35,10 @@
   </style>
   <% for(var i in tree){ %>
     <tr align="center" class="tree" id="0_1" id = 'tr_1'>
-    <td align="left" class="first-cell" style = 'padding-left:<%=tree[i].level%>em'>
+    <td align="left" class="" style='font-weight: bold;padding-left:<%=tree[i].level%>em'>
     			<img src="/Admin/images/menu_minus.gif" id="icon_0_1" width="9" height="9" border="0" style="margin-left:0em" />
-	            <span><a href="javascript:void()" ><%=tree[i].cat_name%></a></span>
-        </td>
+	            <span><a href="javascript:void(0)" ><%=tree[i].cat_name%></a></span>
+    </td>
     <td width="10%"><%=tree[i].intro%></td>
     <td width="10%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
     <td width="10%"><img src="/Admin/images/no.gif" /></td>

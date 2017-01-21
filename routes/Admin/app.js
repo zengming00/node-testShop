@@ -1,23 +1,24 @@
 var express = require('express');
 var fs = require('fs');
 var path = require('path');
-var router = express.Router();
-var catModel = require('../../models/CatModel');
-
 var multer  = require('multer');
 
+var catModel = require('../../models/CatModel');
+var goodsModel = require('../../models/GoodsModel');
+var Dirs = require('../../lib/Dirs');
+var Page = require('../../lib/Page');
+
+var router = express.Router();
+
 var upload = multer({
-    dest: 'uploads/',
+    dest: 'uploads/', //前面不能带/否则会认为是绝对路径导致上传失败
     fileFilter: function fileFilter (req, file, cb) {
-        console.log(file);
-        // 这个函数应该调用 `cb` 用boolean值来
-        // 指示是否应接受该文件
-        // 拒绝这个文件，使用`false`, 像这样:
-        //cb(null, false)
-        // 接受这个文件，使用`true`, 像这样:
-        cb(null, true);
-        // 如果有问题，你可以总是这样发送一个错误:
-        //cb(new Error('I don\'t have a clue!'));
+        if(file.mimetype.substring(0, 'image'.length) == 'image'){
+            cb(null, true);// 接受这个文件
+        }else{
+            //cb(new Error('只能上传图片！'));
+            cb(null, false);// 拒绝这个文件
+        }
     }
 });
 
@@ -50,15 +51,15 @@ router.post('/cateedit', upload.none(), function (req, res) {
     catModel.findByIdAndUpdate(req.body.cat_id, data, function (err, doc) {
         if(err) return res.send(err);
         res.redirect('./catelist');
-    })
-})
+    });
+});
 
 router.get(['/catelist','/cateadd','/cateedit', '/goodsadd'], function (req, res) {
     catModel.find(function (err, rows) {
         if(err) return res.send(err);
         var data = {
             tree: catModel.getTree(rows)
-        }
+        };
         switch(req.path){
             case '/catelist':
                 res.render('Admin/Index/catelist', data);
@@ -71,7 +72,7 @@ router.get(['/catelist','/cateadd','/cateedit', '/goodsadd'], function (req, res
                     }
                     data.cate = cate;
                     res.render('Admin/Index/cateedit', data);
-                })
+                });
                 break;
             case '/cateadd':
                 res.render('Admin/Index/cateadd', data);
@@ -94,18 +95,75 @@ router.get('/catedel', function (req,res) {
 });
 
 router.post('/goodsadd', upload.single('goods_img'), function (req, res) {
-    console.log(req.file);
-    res.send(req.body)
+    if(req.file){ //必需上传了图片
+         /*req.file = { fieldname: 'goods_img',
+         originalname: '139746815261.gif',
+         encoding: '7bit',
+         mimetype: 'image/gif',
+         destination: 'uploads/',
+         filename: 'c5ebc409665c170f8c0f478868eed8cb',
+         path: 'uploads\\c5ebc409665c170f8c0f478868eed8cb',
+         size: 27845 }*/
+        var file = req.file;
+        console.log(file);
+        var uploadsDir = '/' + file.destination;
+        var baseDir = req.app.locals.__dirname + uploadsDir; //文件上传目录的完整路径
+        var ext = file.originalname;
+        ext = ext.substring(ext.lastIndexOf('.')+1);
+        var newfile = file.filename + '.' + ext; //不含路径的新文件名
+        Dirs.getDateDir(baseDir, function (err, path) {//判断并自动创建带日期的文件夹，返回完整路径
+            if(err) return res.send(err);
+            var oldfile = baseDir + file.filename;
+            fs.rename(oldfile, path.fullpath + newfile, function (err) {//移动到新文件夹，并改名
+                if(err) return res.send(err);
+                //req.body = {"goods_name":"1","cat_id":"588164fdea7eb10f303ca2bf","shop_price":"0.15",
+                // "goods_desc":"详细描述","goods_number":"1","is_on_sale":"1","act":"insert"}
+                var goods = new goodsModel(req.body);//act字段因为没在Schema定义所以不会插入
+                goods.goods_img = uploadsDir + path.dir + newfile;
+                goods.save(function (err, doc) {//入库保存
+                    if(err) return res.send(err);
+                    //res.send(doc);
+                    res.redirect('./goodslist');
+                })
+            })
+        })
+    }else{
+        res.send("商品必需带有图片");
+    }
+});
+
+router.get('/goodslist', function (req, res) {
+    goodsModel.find(function (err, docs) {
+        if(err) return res.send(err);
+        var data = {
+            goods: docs
+        };
+        res.render('Admin/Index/goodslist', data);
+    });
+});
+
+router.get('/goodsdel', function (req, res) {
+    goodsModel.findByIdAndRemove(req.query._id, function (err, doc) {
+        if(err){
+            res.send(err);
+        }else{
+            res.redirect('./goodslist');
+        }
+    });
 })
 
 
+
+
+
+//其它静态资源
 router.get(['/','/*.html'],function (req,res) {
     var options = {
         root: req.app.locals.__dirname + '/views/Admin/Index/'
-    }
+    };
     if(req.path == '/'){
         req.path = '/index.html';
     }
     res.sendFile(req.path, options);
-})
+});
 module.exports = router;

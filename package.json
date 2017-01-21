@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "test shop",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
     "serve-favicon": "~2.3.0",
     "session-file-store": "^0.2.1",
     "socket.io": "^1.4.8",
+    "strftime": "^0.10.0",
     "xss": "^0.3.3"
   }
 }

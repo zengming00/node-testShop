@@ -9,19 +9,12 @@ var GoodsSchema = mongoose.Schema({
     goods_img: String,
     goods_desc: String,
     goods_number:Number,
-    is_best: Boolean,
-    is_new: Boolean,
-    is_hot: Boolean,
-    is_on_sale: Boolean,
-    add_time: {
-        type: Date,
-        default: Date.now
-    },
-    last_update: {
-        type: Date,
-        default: Date.now
-    }
-});
+    is_best: {type: Boolean, default: false},
+    is_new: {type: Boolean, default: false},
+    is_hot: {type: Boolean, default: false},
+    is_on_sale: {type: Boolean, default: false}
+},{ timestamps: true }); //开启时间戳功能，自动维护 updatedAt 和 createdAt字段
+
 
 var GoodsModel = mongoose.model('goods', GoodsSchema);
 
