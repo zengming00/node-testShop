@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.locals.__dirname = __dirname;//全局可以通过req.app.locals访问到
 
-app.use('/users', require('./routes/users'));
+//app.use('/users', require('./routes/users'));
 app.use('/chat', require('./routes/chat'));
 app.use('/page', require('./routes/page'));
 
