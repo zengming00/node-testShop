@@ -14,6 +14,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/goods', function(req, res) {
+    //TODO 添加到历史记录
     catModel.find(function (err, cats) {
         if(err) return res.send(err);
         goodsModel.findById(req.query._id, function (err, doc) {

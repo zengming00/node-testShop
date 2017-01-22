@@ -85,6 +85,7 @@ router.get(['/catelist','/cateadd','/cateedit', '/goodsadd'], function (req, res
 });
 
 router.get('/catedel', function (req,res) {
+    //TODO 删除栏目下的子栏目
     catModel.findByIdAndRemove(req.query._id, function (err, cate) {
         if(err){
             res.send(err);
@@ -116,6 +117,7 @@ router.post('/goodsadd', upload.single('goods_img'), function (req, res) {
             var oldfile = baseDir + file.filename;
             fs.rename(oldfile, path.fullpath + newfile, function (err) {//移动到新文件夹，并改名
                 if(err) return res.send(err);
+                //TODO 商品的栏目ID是否应该必需是存在的栏目
                 //req.body = {"goods_name":"1","cat_id":"588164fdea7eb10f303ca2bf","shop_price":"0.15",
                 // "goods_desc":"详细描述","goods_number":"1","is_on_sale":"1","act":"insert"}
                 var goods = new goodsModel(req.body);//act字段因为没在Schema定义所以不会插入
@@ -143,6 +145,7 @@ router.get('/goodslist', function (req, res) {
 });
 
 router.get('/goodsdel', function (req, res) {
+    //TODO 删除图片等相关的资源文件
     goodsModel.findByIdAndRemove(req.query._id, function (err, doc) {
         if(err){
             res.send(err);

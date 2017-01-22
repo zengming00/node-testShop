@@ -31,7 +31,7 @@ app.use('/page', require('./routes/page'));
 app.use('/Admin', require('./routes/Admin/app'));
 //app.use('/Admin', express.static(path.join(__dirname, 'views/Admin/Index')));//会连ejs等文件也暴露出去
 app.use('/', require('./routes/Home/app'));//必需放到/Admin后面，否则自己编写的静态资源提供者会覆盖
-
+app.use('/download', require('./routes/Home/download'));
 
 
 

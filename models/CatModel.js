@@ -27,7 +27,7 @@ CatModel.getTree = function getTree($rows, $pid, $level){
                 parent_id : $row.parent_id,
                 level : $level
             });
-            //if($row._id != $row.parent_id){
+            //if($row._id != $row.parent_id){ //原本以为会死循环，但实际上不会出现
                 $tree = $tree.concat(getTree($rows, $row._id, $level+1));
             //}
         }
