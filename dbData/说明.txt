@@ -1,0 +1,4 @@
+zengming文件夹是用mongodump 备份的
+cates.json和goods.json是用mongoexport 备份的
+
+备份时uploads下的文件是2017年1月22日上传的
