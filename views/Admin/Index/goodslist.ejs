@@ -71,7 +71,7 @@
 <%goods.forEach(function (gs) { %>
   <tr>
     <td class="id-cell"><input type="checkbox" name="checkboxes[]" value="32" /><%=gs._id%></td>
-    <td class="first-cell" style=""><span ><%=gs.goods_name%></span></td>
+    <td class="first-cell" style="text-align:left"><span ><%=gs.goods_name%></span></td>
     <td align="right"><span ><%=gs.shop_price%></span></td>
     <td align="center"><img src="/Admin/images/<%=gs.is_on_sale ? "yes":"no"%>.gif"  /></td>
     <td align="center"><img src="/Admin/images/<%=gs.is_best ? "yes":"no"%>.gif"  /></td>

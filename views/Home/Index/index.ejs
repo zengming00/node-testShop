@@ -133,21 +133,21 @@
                 </div>
             </div>
             <ul class="productlist">
-            	<foreach name="best" item="b">
+<% bestGs.forEach(function(b){ %>
                 <li>
-                    <a href="{:U('Home/Index/goods', array('goods_id'=>$b['goods_id']))}">
-                        <img src="__ROOT__{$b.thumb_img}" alt="{$b.goods_name}" />
+                    <a href="/goods?_id=<%=b._id%>">
+                        <img src="<%=b.goods_img%>" alt="<%=b.goods_name%>" style="width:100px;height:100px;"/>
                     </a>
-                    <p class="pname">
-                        <a href="{:U('Home/Index/goods', array('goods_id'=>$b['goods_id']))}" title="{$b.goods_name}">
-                            {$b.goods_name}
+                    <p class="pname" style="padding: 0 30px;">
+                        <a href="/goods?_id=<%=b._id%>" title="<%=b.goods_name%>">
+                            <%=b.goods_name%>
                         </a>
                     </p>
                     <p class="price">
-                        ￥{$b.shop_price}元
+                        ￥<%=b.shop_price%>元
                     </p>
                 </li>
-                </foreach>
+<% }) %>
             </ul>
             <div class="clear"></div>
             <div class="mainheader">
@@ -158,21 +158,21 @@
                 </div>
             </div>
             <ul class="productlist">
-            	<foreach name="hot" item="h">
+<% hotGs.forEach(function(h){ %>
                 <li>
-                    <a href="{:U('Home/Index/goods', array('goods_id'=>$h['goods_id']))}">
-                        <img src="__ROOT__{$h.thumb_img}" alt="{$h.goods_name}" />
+                    <a href="/goods?_id=<%=h._id%>">
+                        <img src="<%=h.goods_img%>" alt="<%=h.goods_name%>" style="width:100px;height:100px;"/>
                     </a>
-                    <p class="pname">
-                        <a href="{:U('Home/Index/goods', array('goods_id'=>$h['goods_id']))}" title="{$h.goods_name}">
-                            {$h.goods_name}
+                    <p class="pname" style="padding: 0 30px;">
+                        <a href="/goods?_id=<%=h._id%>" title="<%=h.goods_name%>">
+                            <%=h.goods_name%>
                         </a>
                     </p>
                     <p class="price">
-                        ￥{$h.shop_price}元
+                        ￥<%=h.shop_price%>元
                     </p>
                 </li>
-				</foreach>
+<% }) %>
             </ul>
             <div class="clear"></div>
             <div class="mainheader">
@@ -183,21 +183,21 @@
                 </div>
             </div>
             <ul class="productlist">
-            	<foreach name="new" item="n">
+<% newGs.forEach(function(n){ %>
                 <li>
-                    <a href="{:U('Home/Index/goods', array('goods_id'=>$n['goods_id']))}">
-                        <img src="__ROOT__{$n.thumb_img}" alt="{$n.goods_name}" />
+                    <a href="/goods?_id=<%=n._id%>">
+                        <img src="<%=n.goods_img%>" alt="<%=n.goods_name%>" style="width:100px;height:100px;"/>
                     </a>
-                    <p class="pname">
-                        <a href="{:U('Home/Index/goods', array('goods_id'=>$n['goods_id']))}" title="{$n.goods_name}">
-                            {$n.goods_name}
+                    <p class="pname" style="padding: 0 30px;">
+                        <a href="/goods?_id=<%=n._id%>" title="<%=n.goods_name%>">
+                            <%=n.goods_name%>
                         </a>
                     </p>
                     <p class="price">
-                        ￥{$n.shop_price}元
+                        ￥<%=n.shop_price%>元
                     </p>
                 </li>
-                </foreach>
+<% }) %>
             </ul>
         </div>
         <div class="clear">

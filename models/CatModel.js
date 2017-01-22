@@ -52,3 +52,15 @@ CatModel.getFamily = function getFamily($rows, $catid){
      }
      return $arr;
  }
+
+ CatModel.getChildCates = function getChilds($rows, $catid) {
+     var arr = [], k, r;
+     for(k in $rows){
+         r = $rows[k];
+         if(r.parent_id == $catid){
+             arr.push(r._id.toString());
+             arr = arr.concat(getChilds($rows, r._id));
+         }
+     }
+     return arr;
+ }
