@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var Common = require('./lib/Common');
 
 var app = express();
 
@@ -32,6 +32,8 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.locals.__dirname = __dirname;//全局可以通过req.app.locals访问到
+app.locals.toDateStr = Common.toDateStr; //给ejs模板引擎使用的函数
+
 
 //测试
 //app.use('/users', require('./routes/users'));
