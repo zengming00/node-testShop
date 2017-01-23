@@ -82,28 +82,28 @@
             </div>
             <div class="subinfo_body_top10">
                 <ul>
-            <foreach name="history" item="h">
+<% history.forEach(function(h){ %>
                     <li>
                         <div class="subinfo_body_top10_l">
-                            <a href="{:U('Home/Index/goods',array('goods_id'=>$h['goods_id']))}">
-                                <img src="__ROOT__/{$h.thumb_img}" alt=""
+                            <a href="/goods?_id=<%=h._id%>">
+                                <img src="<%=h.goods_img%>" alt=""
                                 class="samllimg" />
                             </a>
                         </div>
                         <div class="subinfo_body_top10_r">
                             <p class="subinfo_body_top10_r_1">
-                                <a href="{:U('Home/Index/goods',array('goods_id'=>$h['goods_id']))}">
-                                	{$h.goods_name}
+                                <a href="/goods?_id=<%=h._id%>">
+                                    <%=h.goods_name%>
                                 </a>
                             </p>
                             <p class="subinfo_body_top10_r_3">
-                                ￥{$h.shop_price}元
+                                ￥<%=h.shop_price%>元
                             </p>
                         </div>
                         <div class="clear">
                         </div>
                     </li>
-            </foreach>
+<% }) %>
                 </ul>
             </div>
             <div class="subinfo_footer">

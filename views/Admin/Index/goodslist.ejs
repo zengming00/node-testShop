@@ -17,17 +17,17 @@
 
 <div class="form-div">
 
-  <form action="{:U('Admin/Index/goodslist')}" method="get" name="searchForm">
+  <form action="/Admin/goodslist" method="get" name="searchForm">
     <img src="/Admin/images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
       
     <select name="cat_id">
-   		 <option value="0">所有分类</option>
-   		 <foreach name="tree" item="i">
-   		 	<option value="{$i['cat_id']}" {$i['cat_id'] == $cat ? "selected":""}>
-   		 		<php>echo str_repeat('&nbsp;',$i['level']);</php>
-   		 		{$i.cat_name}
+   		 <option value="">所有分类</option>
+   		 <% tree.forEach(function(t){ %>
+   		 	<option value="<%=t._id%>" <%= (t._id == cat_id) ? "selected":""%>>
+   		 		<%for(var i=0; i<t.level; i++){%>&nbsp;<%}%>
+   		 		<%=t.cat_name%>
    		 	</option>
-   		 </foreach>
+   		 <% }); %>
     </select>
 
    
@@ -50,12 +50,13 @@
 
   <div class="list-div" id="listDiv">
     <style>
-      .id-cell{width:200px;font-family: Courier, monospace;}
+      /*.id-cell{width:200px;font-family: Courier, monospace;}*/
     </style>
 <table cellpadding="3" cellspacing="1">
   <tr>
     <th class="id-cell">
-      <a href="javascript:void(0)">ID</a><img src="/Admin/images/sort_desc.gif"/>
+      <a href="?sortTime=<%= sortTime == 'D' ? 'A' : 'D'%>">发布时间</a>
+      <img src="/Admin/images/sort_<%= sortTime == 'D' ? 'desc' : 'asc'%>.gif"/>
     </th>
 
     <th><a href="javascript:void(0)">商品名称</a></th>
@@ -70,7 +71,7 @@
   </tr>
 <%goods.forEach(function (gs) { %>
   <tr>
-    <td class="id-cell"><input type="checkbox" name="checkboxes[]" value="32" /><%=gs._id%></td>
+    <td class="id-cell"><input type="checkbox" name="checkboxes[]" value="32" /><%=gs.createdAt.toLocaleString()%></td>
     <td class="first-cell" style="text-align:left"><span ><%=gs.goods_name%></span></td>
     <td align="right"><span ><%=gs.shop_price%></span></td>
     <td align="center"><img src="/Admin/images/<%=gs.is_on_sale ? "yes":"no"%>.gif"  /></td>
@@ -87,12 +88,15 @@
   </tr>
 <%})%>
       </table>
-
+    <style>
+      .page {font-size: 1.5em;}
+      .page .num,.page .current{margin: 2px;}
+      .page .current{color: red;font-weight: bold;}
+    </style>
 <table id="page-table" cellspacing="0">
   <tr>
     <td align="right" nowrap="true">
-      
-     {$page}  
+     <%-page%>
     </td>
   </tr>
 

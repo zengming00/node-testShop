@@ -55,18 +55,18 @@
             </div>
             <div class="subinfo_body_top10">
                 <ul>
-<foreach name="history" item="h">
+<% history.forEach(function(h){ %>
                     <li>
                         <div class="subinfo_body_top10_l">
-                            <a href="{:U('Home/Index/goods',array('goods_id'=>$h['goods_id']))}">
-                                <img src="/{$h.thumb_img}" alt=""
+                            <a href="/goods?_id=<%=h._id%>">
+                                <img src="<%=h.goods_img%>" alt=""
                                 class="samllimg" />
                             </a>
                         </div>
                         <div class="subinfo_body_top10_r">
                             <p class="subinfo_body_top10_r_1">
-                                <a href="{:U('Home/Index/goods',array('goods_id'=>$h['goods_id']))}" title="">
-                                    {$h.goods_name}
+                                <a href="/goods?_id=<%=h._id%>" title="">
+                                    <%=h.goods_name%>
                                 </a>
                             </p>
                             <p class="subinfo_body_top10_r_2">
@@ -74,13 +74,13 @@
                                 </a>
                             </p>
                             <p class="subinfo_body_top10_r_3">
-                                ￥{$h.shop_price}元
+                                ￥<%=h.shop_price%>元
                             </p>
                         </div>
                         <div class="clear">
                         </div>
                     </li>
-</foreach>
+<% }) %>
                 </ul>
             </div>
             <div class="subinfo_footer">
@@ -187,7 +187,7 @@
             <div class="page_header">
                 <form name="selectPageForm" action="/shouji/category.php" method="get">
                     <div id="page" class="pagebar">
-                        {$page}
+                        <%-page%>
                     </div>
                 </form>
                 <script type="Text/Javascript" language="JavaScript">
@@ -219,7 +219,7 @@
             <div class="page_footer" style="    clear: both;">
                 <form name="selectPageForm" action="/shouji/category.php" method="get">
                     <div id="page" class="pagebar">
-                        {$page}
+                        <%-page%>
                     </div>
                 </form>
                 <script type="text/Javascript">

@@ -185,7 +185,7 @@ select{margin-left:3px;}
 
 	.page a{color:#909191;background:#fff; border:1px solid #C9C9C9; height:6px; padding-left:5px; padding-right:5px;}
 	.page a:hover{color:#B18C2F;text-decoration:none;background:#fff;border:1px solid #CF3537;}
-	.page span{color:#fff;border:1px solid #E2E2E2; height:6px; padding-left:5px; padding-right:5px;}
+	.page span{color:#f00;border:1px solid #E2E2E2; height:6px; padding-left:5px; padding-right:5px;}
 
 	.page_txt{color:#909191}
 	.page_input{width:30px; height:20px; border:1px solid #C9C9C9;}

@@ -6,7 +6,7 @@ var fs = require('fs');
 
 var router = express.Router();
 
-
+//打包下载功能
 router.get('/',function(req,res){
     res.append('Content-Disposition', 'attachment; filename="uploads.tar"');
     //res.append('Content-Type', 'application/x-gzip');

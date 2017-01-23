@@ -1,7 +1,8 @@
 var express = require('express');
-var fs = require('fs');
+var Fs = require('fs');
 var path = require('path');
 var multer  = require('multer');
+var Promise = require('bluebird');
 
 var catModel = require('../../models/CatModel');
 var goodsModel = require('../../models/GoodsModel');
@@ -61,7 +62,7 @@ router.get(['/catelist','/cateadd','/cateedit', '/goodsadd'], function (req, res
             tree: catModel.getTree(rows)
         };
         switch(req.path){
-            case '/catelist':
+            case '/catelist': //TODO 每个栏目下的商品数量
                 res.render('Admin/Index/catelist', data);
                 break;
             case '/cateedit':
@@ -115,7 +116,7 @@ router.post('/goodsadd', upload.single('goods_img'), function (req, res) {
         Dirs.getDateDir(baseDir, function (err, path) {//判断并自动创建带日期的文件夹，返回完整路径
             if(err) return res.send(err);
             var oldfile = baseDir + file.filename;
-            fs.rename(oldfile, path.fullpath + newfile, function (err) {//移动到新文件夹，并改名
+            Fs.rename(oldfile, path.fullpath + newfile, function (err) {//移动到新文件夹，并改名
                 if(err) return res.send(err);
                 //TODO 商品的栏目ID是否应该必需是存在的栏目
                 //req.body = {"goods_name":"1","cat_id":"588164fdea7eb10f303ca2bf","shop_price":"0.15",
@@ -134,14 +135,42 @@ router.post('/goodsadd', upload.single('goods_img'), function (req, res) {
     }
 });
 
-router.get('/goodslist', function (req, res) {
-    goodsModel.find(function (err, docs) {
-        if(err) return res.send(err);
-        var data = {
-            goods: docs
-        };
-        res.render('Admin/Index/goodslist', data);
-    });
+router.get('/goodslist', function (req, res, next) {
+    //TODO 查询子栏目下的所有商品
+    //TODO 时间排序与栏目无法同时使用
+    var pms = [catModel.find()];
+    var cat_id = req.query.cat_id ? req.query.cat_id : false;
+    var sortTime = req.query.sortTime || 'D';//默认降序（新发布的在上面）
+    var tplData = {//传递给模板的数据
+        cat_id: cat_id,
+        sortTime: sortTime
+    };
+
+    if(cat_id) {
+        pms.push(goodsModel.count({cat_id: cat_id}));
+    }else{ //未传递栏目ID，查找所有
+        pms.push(goodsModel.count());
+    }
+
+    Promise.all(pms).then(function (datas) {
+        var page = new Page(req, datas[1], 8);
+        tplData.tree = catModel.getTree(datas[0]);
+        tplData.page = page.show();
+        sortTime = sortTime == 'D' ? -1 : 1;
+        var opt = {sort:{_id:sortTime}, skip: page.firstRow, limit: page.listRows};
+        if(cat_id){
+            return goodsModel.find({cat_id: cat_id}, null, opt);
+        }else{
+            return goodsModel.find({}, null, opt);
+        }
+
+    }).then(function (docs) {
+        tplData.goods = docs;
+        res.render('Admin/Index/goodslist', tplData);
+
+    }).catch(function (err) {
+        next(err);
+    })
 });
 
 router.get('/goodsdel', function (req, res) {
@@ -155,7 +184,7 @@ router.get('/goodsdel', function (req, res) {
     });
 })
 
-
+//TODO 商品的再次编辑功能
 
 
 

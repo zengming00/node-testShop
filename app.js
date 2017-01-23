@@ -18,13 +18,25 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//TODO 现在只是开发使用，上线不能这样用，因为默认是内存存储，文档说有内存泄漏的风险
+var session = require('express-session');
+app.use(session({
+  secret: 'session secret',
+  resave: false,
+  saveUninitialized: true
+}));
+
+
+//静态资源
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.locals.__dirname = __dirname;//全局可以通过req.app.locals访问到
 
+//测试
 //app.use('/users', require('./routes/users'));
 app.use('/chat', require('./routes/chat'));
-app.use('/page', require('./routes/page'));
+app.use('/test', require('./routes/test'));
 
 
 
