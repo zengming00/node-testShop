@@ -1,0 +1,94 @@
+<!-- $Id: goods_info.htm 17126 2010-04-23 10:30:26Z liuhui $ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心 - 添加新商品 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/admin/styles/general.css" rel="stylesheet" type="text/css" />
+<link href="/admin/styles/main.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="goodslist">商品列表</a></span>
+<span class="action-span1"><a href="javascript:void(0)">ECSHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 添加新商品 </span>
+<div style="clear:both"></div>
+</h1>
+
+<!-- start goods form -->
+<div class="tab-div">
+    
+
+    <!-- tab body -->
+    <div id="tabbody-div">
+      <form enctype="multipart/form-data" action="" method="post" name="theForm" >
+        <!-- 通用信息 -->
+        <table width="90%" id="general-table" align="center">
+          <tr>
+            <td class="label">商品名称：</td>
+            <td><input type="text" name="goods_name" value="" style="float:left;color:;" size="30" /></td>
+          </tr>
+          <tr>
+            <td class="label">商品分类：</td>
+            <td>
+            <select name="cat_id"  >
+            <option value="0">默认</option>
+            <% for(var t in tree){ %>
+            	<option value="<%=tree[t]._id %>" >
+            	<% for(var i=0; i<tree[t].level; i++){ %>&nbsp;<% } %>
+                  <%=tree[t].cat_name %>
+            	</option>
+            <% } %>
+            </select>
+             </td>
+          </tr>
+                   <tr>
+            <td class="label">本店售价：</td>
+            <td><input type="text" name="shop_price" value="0" size="20" /></td>
+          </tr>
+          
+          <tr>
+            <td class="label">上传商品图片：</td>
+            <td>
+              <input type="file" name="goods_img"  />
+            </td>
+          </tr>
+
+        <!-- 详细描述 -->
+          <tr>
+          	<td class="label">详细描述：</td>
+            <td><textarea name="goods_desc"cols="40" rows="3"></textarea></td>
+          </tr>
+
+        <!-- 其他信息 -->
+          <tr>
+            <td class="label"><a href="javascript:void(0)" title="点击此处查看提示信息"><img src="/admin/images/notice.gif" width="16" height="16" border="0" alt="点击此处查看提示信息"></a> 商品库存数量：</td>
+
+            <td><input type="text" name="goods_number" value="1" size="20" />
+          </tr>
+                    <tr>
+            <td class="label">加入推荐：</td>
+            <td><input type="checkbox" name="is_best" value="1"  />精品 <input type="checkbox" name="is_new" value="1"  />新品 <input type="checkbox" name="is_hot" value="1"  />热销</td>
+          </tr>
+          <tr id="alone_sale_1">
+            <td class="label" id="alone_sale_2">上架：</td>
+            <td id="alone_sale_3"><input type="checkbox" name="is_on_sale" value="1" checked="checked" /> 打勾表示允许销售，否则不允许销售。</td>
+          </tr>
+
+        </table>
+
+  
+        <div class="button-div">
+          <input type="submit" value=" 确定 " class="button" />
+          <input type="reset" value=" 重置 " class="button" />
+        </div>
+        <input type="hidden" name="act" value="insert" />
+      </form>
+    </div>
+</div>
+<!-- end goods form -->
+
+</body>
+</html>

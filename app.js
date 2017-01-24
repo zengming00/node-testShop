@@ -32,20 +32,18 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.locals.__dirname = __dirname;//全局可以通过req.app.locals访问到
-app.locals.toDateStr = Common.toDateStr; //给ejs模板引擎使用的函数
+app.locals.toDateStr = Common.toDateStr; //给ejs模板文件内使用的函数
 
 
 //测试
-//app.use('/users', require('./routes/users'));
 app.use('/chat', require('./routes/chat'));
-app.use('/test', require('./routes/test'));
+app.use('/test', require('./routes/test/test'));
 
-
-
-app.use('/Admin', require('./routes/Admin/app'));
-//app.use('/Admin', express.static(path.join(__dirname, 'views/Admin/Index')));//会连ejs等文件也暴露出去
-app.use('/', require('./routes/Home/app'));//必需放到/Admin后面，否则自己编写的静态资源提供者会覆盖
-app.use('/download', require('./routes/Home/download'));
+app.use('/admin', require('./routes/admin/app'));
+app.use('/admin', express.static(path.join(__dirname, 'views/admin/static')));
+app.use('/', require('./routes/index'));
+app.use('/download', require('./routes/download'));
+app.use('/user', express.static(path.join(__dirname, 'views/user/')));
 
 
 

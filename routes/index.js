@@ -1,106 +1,111 @@
 var express = require('express');
-var Demo = require('../models/model');
+var Promise = require('bluebird');
+var Util = require('util');
+var Z = require('zengming');
 
 var router = express.Router();
 
-router.get('/captcha', function(req, res, next){
-    var captcha = require('ascii-captcha');
-    var pre = '<pre style="font-size:3px;line-height:2px;">\r\n'
-        + captcha.word2Transformedstr(captcha.generateRandomText(5))
-        + '</pre>';
-    res.send(pre);
-});
+var goodsModel = require('../models/GoodsModel');
+var catModel = require('../models/CatModel');
+var Page = require('../lib/Page');
 
-// 首页
-router.get('/', function(req, res, next) {
-    Demo.find(function(err, docs) {
-        res.render('index', {
-            title: 'Express+MongoDb示例',
-            demos: docs
-        });
+
+router.get('/', function (req, res, next) {
+    var pms = [
+        catModel.find(),
+        goodsModel.find({is_best:true, is_on_sale:true}, null, {sort:{_id:-1}, limit:3}),//两种写法，哪种更好呢？
+        goodsModel.find({is_new:true, is_on_sale:true}).sort({_id:-1}).limit(3),
+        goodsModel.find({is_hot:true, is_on_sale:true}).sort({_id:-1}).limit(3)
+    ];
+    Promise.all(pms).then(function(datas){
+        var data = {
+            history : req.session.history || [],
+            tree: catModel.getTree(datas[0]),
+            bestGs: datas[1],
+            newGs: datas[2],
+            hotGs: datas[3]
+        };
+        res.render('index', data);
+    }).catch(function (err) {
+        next(err);
     });
 });
 
-// 跳转到添加数据页面
-router.get('/add.html', function(req, res, next) {
-    Demo.find(function(err, docs) {
-        res.render('add', {
-            title: 'Express+MongoDb示例',
-            demos: docs
-        });
+router.get('/goods', function(req, res, next) {
+    var pms = [
+        catModel.find(),
+        goodsModel.findById(req.query._id)
+    ];
+
+    Promise.all(pms).then(function(datas){
+        var cats = datas[0];
+        var gs = datas[1];
+
+        //添加到历史记录
+        var gsData = {
+            _id:gs._id.toString(),
+            goods_img:gs.goods_img,
+            goods_name:gs.goods_name,
+            shop_price:gs.shop_price
+        };
+        var history = req.session.history || [];
+        var temp = [], i;
+        for(i in history){ //过滤重复数据
+            if(history[i]._id != gsData._id){
+                temp.push(history[i]);
+            }
+        }
+        temp.unshift(gsData);//插入到前面
+        if(temp.length > 5){
+            temp.pop();
+        }
+        req.session.history = temp;
+
+        //渲染
+        var data = {
+            gs : gs,
+            tree : catModel.getTree(cats),
+            family: catModel.getFamily(cats, gs.cat_id)
+        };
+        res.render('goods', data);
+    }).catch(function (err) {
+        next(err);
     });
 });
 
-// 添加一条数据
-router.post('/add.html', function(req, res, next) {
-    
-    var demo = new Demo({
-        uid: req.body.uid,
-        title: req.body.title,
-        content: req.body.content
-    });
+router.get('/category', function(req, res) {
+    catModel.find(function (err, cats) {
+        if(err) return res.send(err);
 
-    console.log('======================create========================');
-
-    demo.save(function(err, doc) {
-        console.log(doc);
-        res.redirect('/');
-    });
-    
-});
-
-// 根据id删除对应的数据
-router.get('/del.html', function(req, res, next) {
-    
-    var id = req.query.id;
-
-    if (id && id != '') {
-        console.log('=====================delete id = ' + id);
-        Demo.findByIdAndRemove(id, function(err, docs) {
-            console.log(docs);
-            res.redirect('/');
-        });
-    }
-    
-});
-
-// 查询对应修改记录，并跳转到修改页面
-router.get('/update.html', function(req, res, next) {
-    
-    var id = req.query.id;
-
-    if (id && id != '') {
-        Demo.findById(id, function(err, docs) {
-            console.log('========================findById(\"' + id + '\")=======================\n' + docs);
-            res.render('update', {
-                title: '修改数据',
-                demo: docs
+        var catid= req.query.cat_id;
+        var childs = catModel.getChildCates(cats, catid);
+        childs.unshift(catid);//将当前栏目也包含在内
+        var gsCond = {cat_id:{$in:childs}};//查询条件
+        goodsModel.count(gsCond, function(err, num){
+            if(err) return res.send(err);
+            var page = new Page(req, num, 9);//取得分页参数
+            goodsModel.find(gsCond, null, {skip:page.firstRow, limit:page.listRows}, function (err, docs) {
+                if(err) return res.send(err);
+                var data = {
+                    gs : docs,
+                    history : req.session.history || [],
+                    page: page.show(),
+                    tree : catModel.getTree(cats),
+                    family: catModel.getFamily(cats, req.query.cat_id)
+                };
+                res.render('category', data);
             });
         });
-    }
-    
+    });
 });
 
-// 修改数据
-router.post('/update.html', function(req, res, next) {
-    
-    var demo = {
-        uid: req.body.uid,
-        title: req.body.title,
-        content: req.body.content
+/*
+//其它静态资源
+router.get('/*.html', function (req, res) {
+    var options = {
+        root: req.app.locals.__dirname + '/views/Home/Index/'
     };
-
-    var id = req.body.id;
-
-    if (id && id != '') {
-        console.log('=======================update id = ' + id);
-        Demo.findByIdAndUpdate(id, demo, function(err, docs) {
-            console.log(docs);
-            res.redirect('/');
-        });
-    }
-    
+    res.sendFile(req.path, options);
 });
-
-
+*/
 module.exports = router;
