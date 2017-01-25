@@ -37,9 +37,15 @@
 					'yzm' : yzm.value
 				};
 				$.post('/user/reg', obj, function (data) {
-					console.log(data);
-				})
-//				location.assign('./');
+					if(data.error){
+						alert(data.error);
+						$("#verify").click();
+					} else {
+						//注册成功
+						alert(''+data.success);
+						location.assign('/'); //TODO 跳转到用户页面
+					}
+				},'json');
 			}
 		}
 		function checkRepassword(input){
@@ -131,7 +137,7 @@
 					<div class="logreg_l">请输入验证码：</div>
 					<div class="logreg_r">
 						<input type="text" name="yzm" id="yzm" class="input" >
-						<p><img src="/user/verify?" onclick="this.src+=1"/></p>
+						<p><img src="/user/verify?" id="verify" onclick="this.src+=1"/></p>
 					</div>
 					<div class="clear"></div>
 				</div>

@@ -8,6 +8,7 @@ var catModel = require('../../models/CatModel');
 var goodsModel = require('../../models/GoodsModel');
 var Dirs = require('../../lib/Dirs');
 var Page = require('../../lib/Page');
+var Verify = require('../../lib/Verify');
 
 var router = express.Router();
 
@@ -28,15 +29,14 @@ router.all('/login', function (req, res) {
     if(req.method == 'GET'){
         res.render('admin/login');
     }else{
-        var verify = req.session.verify || '';
         var username = req.body.username;
         var password = req.body.password;
-        var yzm = req.body.yzm.toUpperCase();
+        var verifyOk = Verify.verify(req, req.body.yzm);
 
-        if(username === 'admin' && password === 'admin123' && verify === yzm){
+        if(username === 'admin' && password === 'admin123' && verifyOk){
             req.session.isAdmin = true;
         }
-        res.redirect('./');
+        res.redirect('./');//如果成功，则会进入后台，如果失败仍会回到登录页
     }
 });
 

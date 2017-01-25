@@ -10,17 +10,37 @@
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/css/style.css" rel="stylesheet" type="text/css" />
+	<script src="/javascripts/jquery.js"></script>
 </head>
 
 <body>
 <% include ../header%>
 
 <div class="mainot">
+	<script>
+		function submitForm(){
+			var obj = {
+				username : $('#username').val(),
+				password : $('#password').val(),
+				yzm : $('#yzm').val()
+			}
+			$.post('/user/login', obj, function (data) {
+				if(data.error){
+					alert(data.error);
+					$("#verify").click();
+				} else {
+					//注册成功
+					alert(''+data.success);
+					location.assign('/'); //TODO 跳转到用户页面
+				}
+			},'json');
+		}
+	</script>
 	<div class="menu">当前位置: <span><a href="/">首页</a> <code>&gt;</code> 用户中心</span></div>
 	<div class="logm" style="height: inherit;padding-bottom: 20px;">
 		<div class="mainbt">登录后，继续操作</div>
 		<div class="logregmain">
-			<form name="formLogin" action="" method="post" >
+			<form name="formLogin" action="" method="post" onsubmit="return false">
 
 				<div class="logregline">
 					<div class="logreg_l">用户名：</div>
@@ -45,15 +65,14 @@
 					<div class="logreg_r">
 						<input id="yzm" name="yzm" type="text" class="input" maxlength="16">
 						<p>
-							<img src="/user/verify?" onclick="this.src+=1"/>
+							<img src="/user/verify?" id="verify" onclick="this.src+=1"/>
 						</p>
 					</div>
 					<div class="clear"></div>
 				</div>
 				<div class="logreg_dl">
 					<a href="/user/reg" style="margin-left: 3em">注册</a>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input class="buttonred" id="loginButton" value="登 录" type="submit">
+					<input class="buttonred" id="loginButton" style="margin-left: 3em" value="登 录" type="submit" onclick="submitForm()">
 				</div>
 			</form>
 		</div>
