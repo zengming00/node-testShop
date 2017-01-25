@@ -135,7 +135,7 @@ select{margin-left:3px;}
 		.quickbuy_r p{margin-bottom:6px}
 
 /*footert*/
-.footert{clear:both;color:#464646;background:#fff url(../images/basetb.jpg) repeat-x 0 -48px;text-align:center;width:1002px;height:160px;margin:15px auto 0 auto;border:1px solid #ccc;}
+.footert{clear:both;color:#464646;background:#fff repeat-x 0 -48px;text-align:center;width:1002px;height:160px;margin:15px auto 0 auto;border:1px solid #ccc;}
 	.footertl{float:left;background:#f8f8f8;width:220px;height:160px;border-right:1px solid #fff;}
 		.footert_1{margin-top:22px;}
 		.footert_2{margin-top:7px;}

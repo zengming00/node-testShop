@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Generator" content="手机网" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>GSM手机_手机类型_ECSHOP演示站 - Powered by ECShop</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="/css/member.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+	<script src="/javascripts/jquery.js"></script>
+</head>
+
+<body>
+<% include ../header %>
+
+<div class="mainot">
+	<script>
+		function submitForm(){
+			//找到所有元素
+			var username = $('#username')[0];
+			var email = $('#email')[0];
+			var password = $('#pwd')[0];
+			var repassword = $('#rpwd')[0];
+			var phone = $('#tel')[0];
+			var yzm = $('#yzm')[0];
+			//提交前检查
+			if(checkUsername(username) && checkEmail(email) && checkPhone(phone) && checkPassword(password) && checkRepassword(repassword)) {
+				var obj = {//构造提交数据
+					'username': username.value,
+					'email': email.value,
+					'password': password.value,
+					'repassword': repassword.value,
+					'phone': phone.value,
+					'yzm' : yzm.value
+				};
+				$.post('/user/reg', obj, function (data) {
+					console.log(data);
+				})
+//				location.assign('./');
+			}
+		}
+		function checkRepassword(input){
+			var pwd = $('#pwd')[0];
+			if(checkPassword(pwd)){//检查第一次输入
+				if(input.value == pwd.value){
+					input.style.background="white";
+					return true;
+				}else{
+					input.style.background="#e99";
+				}
+			}
+			return false;
+		}
+		function checkPassword(input){
+			var pat = /^[a-zA-Z0-9]{6,16}$/;
+			return check(pat,input);
+		}
+		function checkEmail(input){
+			var pat = /^[a-zA-z0-9]+@[a-zA-z0-9]+(\.[a-zA-z0-9]+)+$/;
+			return check(pat,input);
+		}
+		function checkPhone(input){
+			var pat = /^(13[0-9]|14[5|7]|15\d|18\d)\d{8}$/;
+			return check(pat,input);
+		}
+		function checkUsername(input){
+			var pat = /^[a-zA-Z0-9]{6,16}$/;
+			return check(pat,input);
+		}
+		function check(pat,input){
+			if(!pat.test(input.value)){
+				input.style.background="#e99";
+				return false;
+			}else{
+				input.style.background="white";
+				return true;
+			}
+		}
+	</script>
+	<div class="menu">当前位置: <span><a href="/">首页</a> <code>&gt;</code> 用户中心</span></div>
+	<div class="logm" >
+		<img src="/images/login.jpg" style="width: 480px;height: 300px;"/>
+	</div>
+	<div class="regm" style="height: inherit;    padding-bottom: 20px;">
+		<div class="mainbt">还没帐户？注册真的很简单</div>
+		<div class="logregmain">
+			<form name="formUser" action="" method="post" onsubmit="return false">
+				<div class="logregline">
+					<div class="logreg_l">请填写您的用户名：</div>
+					<div class="logreg_r">
+						<input name="username" id="username" type="text" class="input" onblur="checkUsername(this)" />
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<div class="logregline">
+					<div class="logreg_l">请输入手机号：</div>
+					<div class="logreg_r">
+						<input type="text" name="tel" id="tel" class="input" onblur="checkPhone(this)" />
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<div class="logregline">
+					<div class="logreg_l">请输入email地址：</div>
+					<div class="logreg_r">
+						<input type="text" name="email" id="email" class="input" onblur="checkEmail(this)" />
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<div class="logregline">
+					<div class="logreg_l">请设定密码：</div>
+					<div class="logreg_r">
+						<input type="password" name="pwd" id="pwd" class="input" onblur="checkPassword(this)" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="logregline">
+					<div class="logreg_l">请再次输入设定密码：</div>
+					<div class="logreg_r">
+						<input type="password" name="rpwd" id="rpwd" class="input" onblur="checkRepassword(this)" />
+						<p><span id="password_notice">密码请设为6-16位字母或数字</span></p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="logregline">
+					<div class="logreg_l">请输入验证码：</div>
+					<div class="logreg_r">
+						<input type="text" name="yzm" id="yzm" class="input" >
+						<p><img src="/user/verify?" onclick="this.src+=1"/></p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="logreg_dl">
+					<input type="submit" value="注 册" class="buttonred" onclick="submitForm()" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="clear"></div>
+
+
+</div>
+
+<% include ../footer.html %>
+</body>
+</html>

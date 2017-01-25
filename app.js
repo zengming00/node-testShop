@@ -44,6 +44,7 @@ app.use('/admin', express.static(path.join(__dirname, 'views/admin/static')));
 app.use('/', require('./routes/index'));
 app.use('/download', require('./routes/download'));
 app.use('/user', express.static(path.join(__dirname, 'views/user/')));
+app.use('/user', require('./routes/user/user'));
 
 
 

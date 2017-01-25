@@ -24,6 +24,35 @@ var upload = multer({
 });
 
 
+router.all('/login', function (req, res) {
+    if(req.method == 'GET'){
+        res.render('admin/login');
+    }else{
+        var verify = req.session.verify || '';
+        var username = req.body.username;
+        var password = req.body.password;
+        var yzm = req.body.yzm.toUpperCase();
+
+        if(username === 'admin' && password === 'admin123' && verify === yzm){
+            req.session.isAdmin = true;
+        }
+        res.redirect('./');
+    }
+});
+
+router.get('/logout', function (req, res) {
+    req.session.isAdmin = false;
+    res.redirect('./');
+})
+
+//权限控制
+router.use(function (req, res, next) {
+    if(req.session.isAdmin){
+        next();
+    }else{
+        res.redirect('./login');
+    }
+});
 
 router.post('/cateadd', upload.none(), function(req, res, next) {
     var data = {

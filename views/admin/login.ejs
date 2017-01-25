@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>管理员登录</title>
+    <style type="text/css">
+        table{
+            margin:auto;
+            border: 1px solid black;
+        }
+        td{
+            padding:5px 10px;
+            /*border:1px solid #666;*/
+        }
+        input{
+            color: black !important;
+        }
+        input[type='text'],input[type='password']{
+            width:15em;
+        }
+        .center {
+            width: 50%;
+            height: 50%;
+            overflow: auto;
+            margin: auto;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="center">
+    <form method="post" >
+        <table>
+            <tr>
+                <td>用户名：</td>
+                <td><input type="text" name="username"/></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" name="password"/></td>
+            </tr>
+            <tr>
+                <td>验证码：</td>
+                <td><input type="text" name="yzm"/> </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><img src="/user/verify?" onclick="this.src+=1"/></td>
+            </tr>
+            <tr>
+                <td><a href="/">返回首页</a></td>
+                <td>
+                    <input type="submit" value="登录" style="float: right;"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-var mongoose = require('./Common');
+var mongoose = require('./../Common');
 var Schema = mongoose.Schema;
 
 var demoSchema = new Schema({

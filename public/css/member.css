@@ -3,7 +3,7 @@
 .email_notice_no{color:#FF0000}
 .email_notice_blue{color:#009933}
 
-/*reg.html, login.html*/
+
 .content{clear:both;text-align:left;width:1002px;height:auto;margin:15px auto 0 auto;overflow:hidden;}
 
 .mainot{padding-bottom:30px; width:1002px;margin:0 auto;}
@@ -15,7 +15,7 @@
 		
 	.logregmain{padding:25px 0 0 0;}
 	
-	.logm,.regm,.regall,.userright{color:#000;background:url(../images/botbggray.jpg) no-repeat center bottom;border:1px solid #c8c8c8;}
+	.logm,.regm,.regall,.userright{color:#000;border:1px solid #c8c8c8;}
 	.logregmain a,.shopend a{color:#666;text-decoration:underline;}
 	.logregmain a:hover,.shopend a:hover{color:#990005;}
 	.logreg_dl{text-align:center;margin-top:20px;}/*按钮距离*/
