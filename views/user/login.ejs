@@ -30,8 +30,8 @@
 					$("#verify").click();
 				} else {
 					//注册成功
-					alert(''+data.success);
-					location.assign('/'); //TODO 跳转到用户页面
+					//alert(''+data.success);
+					location.assign('/user/info');
 				}
 			},'json');
 		}
@@ -55,7 +55,7 @@
 					<div class="logreg_l">密 码：</div>
 					<div class="logreg_r">
 						<input id="password" name="password" type="password" class="input" maxlength="16">
-						<p><a href="javascript:void(0);"  name="losepsw">忘记密码？</a></p>
+						<p><a href="#"  name="losepsw">忘记密码？</a></p>
 
 					</div>
 					<div class="clear"></div>
@@ -63,7 +63,7 @@
 				<div class="logregline">
 					<div class="logreg_l">验证码：</div>
 					<div class="logreg_r">
-						<input id="yzm" name="yzm" type="text" class="input" maxlength="16">
+						<input id="yzm" name="yzm" type="text" class="input" maxlength="16"  AUTOCOMPLETE="off">
 						<p>
 							<img src="/user/verify?" id="verify" onclick="this.src+=1"/>
 						</p>

@@ -39,11 +39,18 @@ app.locals.toDateStr = Common.toDateStr; //给ejs模板文件内使用的函数
 app.use('/chat', require('./routes/chat'));
 app.use('/test', require('./routes/test/test'));
 
+
+//为全站提供登录用户的信息，方便在ejs中使用
+app.use(function(req, res, next) {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
 app.use('/admin', require('./routes/admin/app'));
 app.use('/admin', express.static(path.join(__dirname, 'views/admin/static')));
 app.use('/', require('./routes/index'));
 app.use('/download', require('./routes/download'));
-app.use('/user', express.static(path.join(__dirname, 'views/user/')));
+// app.use('/user', express.static(path.join(__dirname, 'views/user/')));
 app.use('/user', require('./routes/user/user'));
 
 

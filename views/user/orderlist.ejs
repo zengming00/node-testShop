@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Generator" content="手机网" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>GSM手机_手机类型_ECSHOP演示站 - Powered by ECShop</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="/css/member.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<% include ../header%>
+
+<div class="content">
+	<div class="menu">当前位置: <span><a href="">首页</a> <code>&gt;</code> 用户中心</span></div>
+	<div class="user">
+		<div class="usernav">
+			<dl>
+				<dt><span>　</span>帐户管理</dt>
+				<dd class="ddor">
+					<a href="/user/orderlist">我的订单</a>
+				</dd>
+				<dd>
+					<a href="/user/liuyan">我的留言</a>
+				</dd>
+				<dd>
+					<a href="/user/favor">我的收藏</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt><span>　</span>个人信息管理</dt>
+				<dd>
+					<a href="/user/info">用户信息</a>
+				</dd>
+				<dd>
+					<a href="/user/repwd">修改密码</a>
+				</dd>
+				<dd>
+					<a href="/user/address">收货地址</a>
+				</dd>
+			</dl>
+		</div>
+
+		<div class="usermain">
+			
+						<div class="userright">
+				<div class="mainbt">我的订单</div>		
+				<div class="shop">
+					<ul class="shop_b">
+						<li class="shop_color">订单号</li>
+
+						<li class="cart_much">下单时间</li>
+						<li class="cart_nu">订单总金额</li>
+						<li class="shop_name">订单状态</li>
+						<li class="shop_oper">操作</li>
+						<div class="clear"></div>
+					</ul>
+					
+                    <ul class="ulcollection">
+						<li class="shop_color"><a href="user.php?act=order_detail&order_id={$item.order_id}" class="f6">2011091208</a></li>
+						<li class="cart_much">2011-12-13</li>
+						<li class="cart_nu">2345</li>
+						<li class="shop_name">已支付,已发货</li>
+						<li class="shop_oper"><font class="f6">删除</font></li>
+						<div class="clear"></div>
+					</ul>
+
+					<div class="contno" style="overflow:hidden;height:30px;">
+
+					<div class="page">
+						
+<form name="selectPageForm" action="/shouji/user.php" method="get">
+
+
+ <div id="page" class="pagebar">
+  <span class="f_l f6" style="margin-right:10px;">总计 <b>0</b>  个记录</span>
+      
+      </div>
+
+</form>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+
+//-->
+</script>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="clear"></div>			
+					</div>
+				</div>	  
+				
+		<div class="clear"></div>		
+	</div>
+</div>
+
+<% include ../footer.html%>
+
+</body>
+</html>

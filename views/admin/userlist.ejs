@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ECSHOP 管理中心 - 用户列表 </title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/admin/styles/general.css" rel="stylesheet" type="text/css" />
+    <link href="/admin/styles/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<h1>
+    <span class="action-span1"><a href="javascript:void(0)">ECSHOP 管理中心</a> </span>
+    <span id="search_id" class="action-span1"> - 用户列表 </span>
+    <div style="clear:both"></div>
+</h1>
+<form method="post" action="" name="listForm">
+    <div class="list-div" id="listDiv">
+
+        <table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+            <tr>
+                <th>用户名</th>
+                <th>手机</th>
+                <th>邮箱</th>
+                <th>地址</th>
+            </tr>
+            <style>
+                tr{background: white;}
+                tr:hover{	background:#aaa; }
+                td{	background:inherit !important;  }
+            </style>
+<% users.forEach(function(u){ %>
+            <tr align="center" class="tree" id="0_1" id = 'tr_1'>
+                <td align="left" class="" style='font-weight: bold;padding-left: 2em'>
+                    <span><a href="javascript:void(0)" ><%=u.userName%></a></span>
+                </td>
+                <td><%=u.phone%></td>
+                <td align="right"><%=u.email%></td>
+                <td width="40%"><%=u.address%></td>
+            </tr>
+<% }) %>
+        </table>
+    </div>
+</form>
+
+<div id="footer">
+    本站使用Node.js + express + mongodb 提供强劲动力<br />
+    版权所有 &copy; 2010-2017 zengming QQ:243786753，并保留所有权利。
+</div>
+</body>
+</html>

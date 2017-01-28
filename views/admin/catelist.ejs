@@ -41,7 +41,7 @@
     </td>
     <td width="10%"><%=tree[i].intro%></td>
     <td width="10%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
-    <td width="10%"><img src="/admin/images/no.gif" /></td>
+    <td width="10%"><img src="/admin/images/<%=tree[i].parent_id==0?'yes':'no'%>.gif" /></td>
     <td width="10%"><img src="/admin/images/yes.gif" /></td>
     <td><span>5</span></td>
 
@@ -57,10 +57,9 @@
 </form>
 
 <div id="footer">
-共执行 1 个查询，用时 0.015927 秒，Gzip 已禁用，内存占用 1.999 MB<br />
-
-版权所有 &copy; 2005-2010 上海商派网络科技有限公司，并保留所有权利
-。</div>
+  本站使用Node.js + express + mongodb 提供强劲动力<br />
+  版权所有 &copy; 2010-2017 zengming QQ:243786753，并保留所有权利。
+</div>
 
 </body>
 </html>

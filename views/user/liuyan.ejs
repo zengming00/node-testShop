@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Generator" content="手机网" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>GSM手机_手机类型_ECSHOP演示站 - Powered by ECShop</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="/css/member.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<% include ../header %>
+
+<div class="content">
+	<div class="menu">当前位置: <span><a href="">首页</a> <code>&gt;</code> 用户中心</span></div>
+	<div class="user">
+		<div class="usernav">
+			<dl>
+				<dt><span>　</span>帐户管理</dt>
+				<dd>
+					<a href="/user/orderlist">我的订单</a>
+				</dd>
+				<dd class="ddor">
+					<a href="/user/liuyan">我的留言</a>
+				</dd>
+				<dd>
+					<a href="/user/favor">我的收藏</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt><span>　</span>个人信息管理</dt>
+				<dd>
+					<a href="/user/info">用户信息</a>
+				</dd>
+				<dd>
+					<a href="/user/repwd">修改密码</a>
+				</dd>
+				<dd>
+					<a href="/user/address">收货地址</a>
+				</dd>
+			</dl>
+		</div>
+		<div class="usermain">
+			
+						<div class="userright">
+         			<div class="mainbt">我的留言</div>	 
+				<div class="linebt" style="margin-top: 20px;"><span>我的留言</span><em></em></div>
+				<form action="user.php" method="post" enctype="multipart/form-data" name="formMsg" onsubmit="return submitMsg()">
+				<div class="logregmain">
+
+					<div class="logregline">
+						<div class="logreg_l">留言类型：</div>
+						<div class="logreg_r">
+							<input name="msg_type" type="radio" value="0" checked="checked" />
+							留言							<input type="radio" name="msg_type" value="1" />
+							投诉							<input type="radio" name="msg_type" value="2" />
+							询问							<input type="radio" name="msg_type" value="3" />
+
+							售后							<input type="radio" name="msg_type" value="4" />
+							求购						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="logregline">
+						<div class="logreg_l">主题：</div>
+						<div class="logreg_r"><input name="msg_title" maxlength="100" class="input" type="text"></div>
+
+						<div class="clear"></div>
+					</div>
+					<div class="logregline">
+						<div class="logreg_l">留言内容：</div>
+						<div class="logreg_r"><textarea name="msg_content" cols="50" rows="4" wrap="virtual" class="input" style="width: 300px;"></textarea></div>
+						<div class="clear"></div>
+					</div>
+					<div class="logreg_dl">
+						<div class="logreg_l">&nbsp;</div>
+						<div class="logreg_r" style="text-align: left;">
+							<input name="act" value="act_add_message" type="hidden">
+
+							<input value="提 交" class="buttonred" type="submit">
+						<div class="clear"></div>
+					</div>
+				</div>
+				</form>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>	  
+				
+		<div class="clear"></div>		
+	</div>
+</div>
+
+<% include ../footer.html %>
+
+</body>
+</html>

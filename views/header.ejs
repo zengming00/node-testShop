@@ -4,13 +4,16 @@
         </div>
         <div class="header_top_m">
             <div style='float:left' id="ECS_MEMBERZONE">
-                欢迎光临本店　　　　
+                欢迎光临本店
+            <% if(user) { %>
+                <%=user.userName%>
+                <a href="/user/logout">退出登录</a>
+            <% } else { %>
                 <a href="/user/login">会员登录</a>|
                 <a href="/user/reg">免费注册</a>
+            <% } %>
                 <label id="myaccount">
-                    <a href="javascript:void(0)">
-                        我的帐户
-                    </a>
+                    <a href="/user/info">我的帐户</a>
                 </label>
                 <label id="helpcenter">
                     <a href="javascript:void(0)">

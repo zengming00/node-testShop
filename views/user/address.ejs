@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="Generator" content="手机网"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <title>GSM手机_手机类型_ECSHOP演示站 - Powered by ECShop</title>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="icon" href="animated_favicon.gif" type="image/gif"/>
+    <link href="/css/member.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/javascripts/jquery.js"></script>
+</head>
+
+<body>
+<% include ../header %>
+
+<div class="content">
+    <div class="menu">当前位置: <span><a href="">首页</a> <code>&gt;</code> 用户中心</span></div>
+    <div class="user">
+        <div class="usernav">
+            <dl>
+                <dt><span>　</span>帐户管理</dt>
+                <dd>
+                    <a href="/user/orderlist">我的订单</a>
+                </dd>
+                <dd>
+                    <a href="/user/liuyan">我的留言</a>
+                </dd>
+                <dd>
+                    <a href="/user/favor">我的收藏</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt><span>　</span>个人信息管理</dt>
+                <dd>
+                    <a href="/user/info">用户信息</a>
+                </dd>
+                <dd>
+                    <a href="/user/repwd">修改密码</a>
+                </dd>
+                <dd class="ddor">
+                    <a href="/user/address">收货地址</a>
+                </dd>
+            </dl>
+        </div>
+        <div class="usermain">
+
+            <div class="userright">
+                <form name="formPassword" action="" method="post">
+                    <div class="mainbt">收货地址</div>
+                    <div class="logregmain">
+                        <div class="logregline">
+                            <div class="logreg_l">原地址：</div>
+                            <div class="logreg_r" id="oldaddr">
+                                <% if(user.address){ %>
+                                    <%=user.address%>
+                                <% }else{ %>
+                                    <span style="color:red;">未填写</span>
+                                <% } %>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="logregline">
+                            <div class="logreg_l">收件人：</div>
+                            <div class="logreg_r">
+                                <input type="text" name="name" id="name" class="input"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="logregline">
+                            <div class="logreg_l">电话：</div>
+                            <div class="logreg_r">
+                                <input type="text" name="phone" id="phone" class="input"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="logregline">
+                            <div class="logreg_l">详细地址：</div>
+                            <div class="logreg_r">
+                                <textarea name="address" id="address" class="input" rows="4" cols="30"
+                                          style="margin: 0px 3px;width: 350px;height: 80px;"></textarea>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="logreg_dl">
+                            <input style='padding: 0 2px;' class="buttonred" value="确认修改" type="submit">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </form>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script>
+    /*
+    var content = $.trim($('#oldaddr').text());
+    var arr = t.split(/\s+/);
+    if(arr.length >= 3) {
+        $('#phone').val(arr[arr.length-1])
+        $('#name').val(arr[arr.length-2])
+        $('#address').val(content);
+    }*/
+</script>
+<% include ../footer.html %>
+</body>
+</html>

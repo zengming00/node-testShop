@@ -90,7 +90,7 @@ router.post('/login', function (req, res) {
         }
         if(doc){
             if(doc.password === encodePassword($password, doc.salt)){
-                //TODO 相关信息保存到session， 设置登录状态
+                req.session.user = doc;
                 res.json({success:'登录成功！'});
             }else{
                 res.json({error:'密码错误！'});
@@ -102,41 +102,97 @@ router.post('/login', function (req, res) {
 });
 
 
-
-
-
-
-
-
-
-//中间件，对之后的路由提供cats内容
-router.use(function (req, res, next) {
-    if(req.method === 'GET'){
-        switch (req.path){ //进行更严格的筛选是必要的，因为其它路径有可能也会执行查找操作，造成资源浪费
-            case '/reg':
-            case '/login':{
-                catModel.find(function (err, docs) {
-                    if(err) return next(err);
-                    res.locals.tree = catModel.getTree(docs);
-                    next();
-                });
-                break;
-            }
-            default:
-                next();
-        }
-    }else{
+//中间件，提供cats内容
+var getCats = function getCats(req, res, next) {
+    catModel.find(function (err, docs) {
+        if(err) return next(err);
+        console.log('----------getCats()------------------------------------------------------');
+        res.locals.tree = catModel.getTree(docs);
         next();
-    }
-});
+    });
+};
 
-router.get('/reg', function (req, res) {
+router.get('/reg', getCats, function (req, res) {
     res.render('user/reg');
 });
 
-router.get('/login', function(req, res) {
+router.get('/login', getCats, function(req, res) {
     res.render('user/login');
 });
 
+router.get('/logout', function (req, res) {
+    req.session.user = null;
+    res.redirect('./login');
+});
+
+//之后的操作必需登录了用户
+router.use(function (req, res, next) {
+    if(req.session.user){
+        next();
+    }else{
+        res.redirect('./login');
+    }
+});
+
+router.all('/address', getCats, function (req, res) {
+    if(req.method == 'GET'){
+        res.render('user/address');
+    } else {
+        var addr = req.body.address + '  ' + req.body.name + '  ' + req.body.phone;
+        var id = req.session.user._id;
+        addr = addr.trim();
+        userModel.findByIdAndUpdate(id, {$set:{address:addr}}, function (err, doc) {
+            if(err) return res.send(err);
+            req.session.user.address = addr;
+            res.redirect('./address');
+        });
+    }
+});
+
+router.get('/favor', getCats, function (req, res) {
+    res.render('user/favor');
+});
+
+router.get('/liuyan', getCats, function (req, res) {
+    res.render('user/liuyan');
+});
+
+router.get('/orderlist', getCats, function (req, res) {
+    res.render('user/orderlist');
+});
+
+router.all('/repwd', getCats, function (req, res) {
+    if(req.method == 'POST'){
+        var $oldpassword = req.body.old_password;
+        var $password = req.body.new_password;
+        var $repassword = req.body.comfirm_password;
+
+        if (!/^[a-zA-Z0-9]{6,16}$/.test($password)) {
+            return res.json({error:"密码只能是6-16位英文字母+数字"});
+        } else if ($password !== $repassword) {
+            return res.json({error:"两次密码不一致"});
+        }
+
+        var doc = req.session.user;
+        if(doc.password === encodePassword($oldpassword, doc.salt)){
+            //旧密码验证成功
+            $password = encodePassword($password, doc.salt);
+            var id = req.session.user._id;
+            userModel.findByIdAndUpdate(id, {$set:{password:$password}}, function (err, doc) {
+                if(err) return res.json({error:err});
+                req.session.user.password = $password;
+                res.json({success:'修改成功'});
+            });
+        }else{
+            return res.json({error:"原密码错误"});
+        }
+    } else { //GET请求
+        res.render('user/repwd');
+    }
+});
+
+router.get('/info', getCats, function (req, res) {
+    res.render('user/info');//ejs可以访问到req.session.x的内容
+});
 
 module.exports = router;

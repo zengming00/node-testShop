@@ -6,6 +6,7 @@ var Promise = require('bluebird');
 
 var catModel = require('../../models/CatModel');
 var goodsModel = require('../../models/GoodsModel');
+var userModel = require('../../models/UserModel');
 var Dirs = require('../../lib/Dirs');
 var Page = require('../../lib/Page');
 var Verify = require('../../lib/Verify');
@@ -211,9 +212,19 @@ router.get('/goodsdel', function (req, res) {
             res.redirect('./goodslist');
         }
     });
-})
+});
 
 //TODO 商品的再次编辑功能
+
+
+router.get('/userlist', function (req, res) {
+    userModel.find(function (err, docs) {
+        if(err) return res.send(err);
+        res.locals.users = docs;
+        res.render('admin/userlist');
+    })
+});
+
 
 
 /*
