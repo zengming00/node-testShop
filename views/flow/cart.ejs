@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="Generator" content="手机网" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<title>GSM手机_手机类型_ECSHOP演示站 - Powered by ECShop</title>
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+	<link href="/css/member.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<%include ../header%>
+<div class="content">
+	<div class="user">
+		<div class="menu">当前位置: <span><a href="">首页</a> <code>&gt;</code> 购物流程</span></div>
+		<form id="formCart" name="formCart" method="post">
+			<div class="shop">
+				<div class="linebt"><span><img src="/images/cart.jpg" align="absmiddle" />我的购物车</span><em></em></div>
+				<ul class="shop_b">
+					<li class="shop_num">序号</li>
+					<li class="shop_pic">　</li>
+					<li class="shop_name">商品名称</li>
+					<li class="shop_nu">购买数量</li>
+					<li class="shop_much">单价</li>
+					<li class="shop_sum">小计</li>
+					<li class="shop_oper">操作</li>
+					<div class="clear"></div>
+				</ul>
+				<ul class="ulcart">
+					<li class="shop_num">1</li>
+					<li class="shop_pic">
+						<div class="promin_mainpic">
+							<div class="promin_mainpicn">
+								<a href="goods.php?id=32" target="_blank"><img src="images/200905/thumb_img/32_thumb_G_1242110760196.jpg" border="0" title="诺基亚N85" /></a><br />
+								<i></i>
+							</div>
+						</div>
+					</li>
+					<li class="shop_name">
+						<a href="goods.php?id=32" target="_blank">诺基亚N85</a>
+					</li>
+					<li class="shop_nu">
+						<img src="/images/bag_close.gif" onclick="decrCart()" />
+						<input type="text" name="goods_number[44]" class="input_num" id="goods_number_44" value="1" size="4" style="text-align:center" readonly="true" />
+						<img src="/images/bag_open.gif" onclick="addCart()" />
+					</li>
+					<li class="shop_much">￥3010.00元</li>
+					<li class="shop_sum">￥3010.00元</li>
+					<li class="shop_oper">
+						<a href="#" class="f6">删除</a>
+						<a href="#" class="f6">放入收藏夹</a>
+					</li>
+					<div class="clear"></div>
+				</ul>
+				<div class="contno">
+				<span>购物金额总计 ￥3010.00元</span>
+				</div>
+				<div class="shop_bot">
+					<span class="left"></span>
+					<span class="right">
+					<input type="hidden" name="step" value="update_cart" />
+					<input type="button" value="继续购物" class="button_shop" style="cursor:pointer" onClick="location.href='/';">
+					<input type="button" value="开始结算" style="cursor:pointer" class="buttonredb" onClick="if (1==0) {alert('您还没有添加商品，无法进行结算。');return;}window.location.href='flow.php?step=checkout'">
+				</span>
+					<span class="clear"></span>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</form>
+	</div>
+</div>
+<%include ../footer.html%>
+</body>
+</html>

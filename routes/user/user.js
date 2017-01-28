@@ -9,6 +9,9 @@ var userModel = require('../../models/UserModel');
 var Comm = require('../../lib/Common');
 var Verify = require('../../lib/Verify');
 
+var c = require('./common');
+//中间件，提供cats内容
+var getCats = c.getCats;
 var router = express.Router();
 
 
@@ -102,19 +105,10 @@ router.post('/login', function (req, res) {
 });
 
 
-//中间件，提供cats内容
-var getCats = function getCats(req, res, next) {
-    catModel.find(function (err, docs) {
-        if(err) return next(err);
-        console.log('----------getCats()------------------------------------------------------');
-        res.locals.tree = catModel.getTree(docs);
-        next();
-    });
-};
-
 router.get('/reg', getCats, function (req, res) {
     res.render('user/reg');
 });
+
 
 router.get('/login', getCats, function(req, res) {
     res.render('user/login');

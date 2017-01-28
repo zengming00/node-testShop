@@ -52,6 +52,7 @@ app.use('/', require('./routes/index'));
 app.use('/download', require('./routes/download'));
 // app.use('/user', express.static(path.join(__dirname, 'views/user/')));
 app.use('/user', require('./routes/user/user'));
+app.use('/flow', require('./routes/user/flow'));
 
 
 
