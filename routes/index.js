@@ -7,7 +7,7 @@ var router = express.Router();
 
 var goodsModel = require('../models/GoodsModel');
 var catModel = require('../models/CatModel');
-var Page = require('../lib/Page');
+var Page = require('../lib/Page.class');
 
 
 router.get('/', function (req, res, next) {

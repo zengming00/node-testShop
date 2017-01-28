@@ -8,7 +8,7 @@ var catModel = require('../../models/CatModel');
 var goodsModel = require('../../models/GoodsModel');
 var userModel = require('../../models/UserModel');
 var Dirs = require('../../lib/Dirs');
-var Page = require('../../lib/Page');
+var Page = require('../../lib/Page.class');
 var Verify = require('../../lib/Verify');
 
 var router = express.Router();

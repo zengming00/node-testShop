@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Page = require('../../lib/Page');
+var Page = require('../../lib/Page.class');
 var Comm = require('../../lib/Common');
 
 // 首页

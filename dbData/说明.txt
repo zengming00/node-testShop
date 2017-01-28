@@ -1,4 +1,4 @@
-zengmingÎÄ¼ş¼ĞÊÇÓÃmongodump ±¸·İµÄ
-cates.jsonºÍgoods.jsonÊÇÓÃmongoexport ±¸·İµÄ
+zengmingæ–‡ä»¶å¤¹æ˜¯ç”¨mongodump å¤‡ä»½çš„
+cates.jsonå’Œgoods.jsonæ˜¯ç”¨mongoexport å¤‡ä»½çš„
 
-±¸·İÊ±uploadsÏÂµÄÎÄ¼şÊÇ2017Äê1ÔÂ22ÈÕÉÏ´«µÄ
+å¤‡ä»½æ—¶uploadsä¸‹çš„æ–‡ä»¶æ˜¯2017å¹´1æœˆ22æ—¥ä¸Šä¼ çš„
