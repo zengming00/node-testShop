@@ -49,8 +49,8 @@ router.get('/goods', function(req, res, next) {
             shop_price:gs.shop_price
         };
         var history = req.session.history || [];
-        var temp = [], i;
-        for(i in history){ //过滤重复数据
+        var temp = [];
+        for(var i=0; i<history.length; i++){ //过滤重复数据
             if(history[i]._id != gsData._id){
                 temp.push(history[i]);
             }

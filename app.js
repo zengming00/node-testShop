@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Common = require('./lib/Common');
+var Cart = require('./routes/Cart.class');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use('/test', require('./routes/test/test'));
 //为全站提供登录用户的信息，方便在ejs中使用
 app.use(function(req, res, next) {
   res.locals.user = req.session.user || null;
+  res.locals.cart = new Cart(req.session.cart || []); //购物车
   next();
 });
 

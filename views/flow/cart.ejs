@@ -30,34 +30,36 @@
 					<li class="shop_oper">操作</li>
 					<div class="clear"></div>
 				</ul>
+<%cart.items().forEach(function(g,i){%>
 				<ul class="ulcart">
-					<li class="shop_num">1</li>
+					<li class="shop_num"><%-i+1%></li>
 					<li class="shop_pic">
 						<div class="promin_mainpic">
 							<div class="promin_mainpicn">
-								<a href="goods.php?id=32" target="_blank"><img src="images/200905/thumb_img/32_thumb_G_1242110760196.jpg" border="0" title="诺基亚N85" /></a><br />
+								<a href="/goods?_id=<%=g.id%>" target="_blank"><img src="<%=g.img%>" border="0" /></a><br />
 								<i></i>
 							</div>
 						</div>
 					</li>
 					<li class="shop_name">
-						<a href="goods.php?id=32" target="_blank">诺基亚N85</a>
+						<a href="/goods?_id=<%=g.id%>" target="_blank"><%=g.name%></a>
 					</li>
 					<li class="shop_nu">
 						<img src="/images/bag_close.gif" onclick="decrCart()" />
-						<input type="text" name="goods_number[44]" class="input_num" id="goods_number_44" value="1" size="4" style="text-align:center" readonly="true" />
+						<input type="text" name="goods_number[44]" class="input_num" id="goods_number_44" value="<%=g.num%>" size="4" style="text-align:center" readonly="true" />
 						<img src="/images/bag_open.gif" onclick="addCart()" />
 					</li>
-					<li class="shop_much">￥3010.00元</li>
-					<li class="shop_sum">￥3010.00元</li>
+					<li class="shop_much">￥<%=g.price%>元</li>
+					<li class="shop_sum">￥<%=g.price * g.num%>元</li>
 					<li class="shop_oper">
 						<a href="#" class="f6">删除</a>
 						<a href="#" class="f6">放入收藏夹</a>
 					</li>
 					<div class="clear"></div>
 				</ul>
+<%})%>
 				<div class="contno">
-				<span>购物金额总计 ￥3010.00元</span>
+				<span>购物金额总计 ￥<%=cart.getTotalMoney()%>元</span>
 				</div>
 				<div class="shop_bot">
 					<span class="left"></span>
