@@ -48,8 +48,12 @@ Cart.prototype.getTotalMoney = function getTotalMoney() {
     for(var i=0; i<this.goods.length; i++){
         totalMoney += (this.goods[i].price * this.goods[i].num);
     }
-    return totalMoney;
+    return this.floor(totalMoney);
 };
+
+Cart.prototype.floor = function floor(n) {
+    return Math.floor(n*100)/100;//保留两位小数
+}
 
 Cart.prototype.incr = function incr(id) {
     for(var i=0; i<this.goods.length; i++){

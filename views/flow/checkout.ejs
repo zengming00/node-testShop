@@ -18,7 +18,7 @@
 	<div class="user">
 		<div class="menu">当前位置: <span><a href="">首页</a> <code>&gt;</code> 购物流程</span></div>
 
-		<form id=theForm name=theForm onsubmit="return false" action=flow.php method=post>
+		<form id=theForm name=theForm action="/flow/done" method=post>
 
 			<div class=shop>
 				<div class=shoporder>
@@ -27,12 +27,18 @@
 						<div class=tfmain_m>
 							<div class=shoporder_mdiv>
 								<div class=tfmain_mdivm id=step_2_address>
-									<p>收货人姓名：<span id=view_name>曾明</span></p>
-									<p>手机：<span id=view_mobile>13426060134</span></p>
-									<p>详细地址：<span id=view_address>hjkljjh</span></P>
+									<p>收货地址：
+										<span>
+											<%if(user.address){%>
+											<%=user.address%>
+											<%}else{%>
+											<span style="color:red">未填写（<a href="/user/address">立即填写</a>）</span>
+											<%}%>
+										</span>
+									</p>
 									<div class=clear></div>
 								</div>
-								<div class=tfmain_butr><a href="#" name=but_step2_g1>修改</a></div>
+								<div class=tfmain_butr><a href="/user/address" name=but_step2_g1>修改</a></div>
 							</div>
 						</div>
 					</div>
@@ -41,25 +47,24 @@
 						<ul class=orderm_b>
 							<li class=orderm_num>序号 </li>
 							<li class=orderm_zjd>商品名称 </li>
-							<li class=orderm_zt>颜色 </li>
 							<li class=orderm_xq>购买数量 </li>
 							<li class=orderm_zf>本店价 </li>
 							<li class=orderm_zf>小计 <div class=clear></div></li>
 						</ul>
+<%cart.items().forEach(function(g,i){%>
 						<ul>
-							<li class=orderm_num>1 </li>
+							<li class=orderm_num><%-i+1%></li>
 							<li class=orderm_zjd>
-								<a href="goods.php?id=32" target="_blank">诺基亚N85</a>
+								<a href="/goods?_id=<%=g.id%>" target="_blank"><%=g.name%></a>
 							</li>
-							<li class=orderm_zt>黑色</li>
-							<li class=orderm_xq>
-								1			  </li>
-							<li class=orderm_zf>3010.00 </li>
-							<li class=orderm_zf>3010.00</li><div class=clear></div>
+							<li class=orderm_xq><%=g.num%></li>
+							<li class=orderm_zf><%=g.price%> </li>
+							<li class=orderm_zf><%=cart.floor(g.price * g.num)%></li><div class=clear></div>
 						</ul>
+<%})%>
 						<div class=contno>
 							<div class=contno_l>
-								<span>购物金额小计 ￥3010.00元</span>
+								<span>购物金额总计 ￥<%=cart.getTotalMoney()%>元</span>
 							</div>
 							<div class=contno_r><a class=f6 href="/flow/cart">回到购物车，添加或删除商品</a></div>
 							<div class=clear></div>
@@ -74,7 +79,7 @@
 										<dd style="border-bottom:none">
 											<span class=left>订单附言:</span>
 											<span class=left>
-												<textarea id=postscript style="border-right: #ccc 1px solid; border-top: #ccc 1px solid; border-left: #ccc 1px solid; border-bottom: #ccc 1px solid" name=postscript rows=3 cols=80></textarea>
+												<textarea id=postscript style="border-right: #ccc 1px solid; border-top: #ccc 1px solid; border-left: #ccc 1px solid; border-bottom: #ccc 1px solid" name='fuyan' rows=3 cols=80></textarea>
 				  							</span>
 											<span class=clear></span>
 										</dd>
@@ -89,17 +94,16 @@
 							<div class=shoporder_mdiv>
 								<div class=tfmain_mdivm>
 									<div id=ECS_ORDERTOTAL style="padding-bottom: 20px; text-align: right">
-										商品总价: <font class=f4_b>￥3010.00元</font> <br>
-										应付款金额: <font class=f4_b>￥3010.00元</font> <br>
+										商品总价: <font class=f4_b>￥<%=cart.getTotalMoney()%>元</font> <br>
+										应付款金额: <font class=f4_b>￥<%=cart.getTotalMoney()%>元</font> <br>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<input type=hidden value=done name=step>
 					<div class=shoporder_enter>
 						请确认以上信息，下单后将无法修改<br>
-						<button class=buttonredb id=overbutton name=button_enter type=submit>确定下单</button>
+						<input class=buttonredb type="submit" value="确定下单"/>
 					</div>
 				</div>
 			</div>

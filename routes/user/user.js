@@ -186,7 +186,7 @@ router.all('/repwd', getCats, function (req, res) {
 });
 
 router.get('/info', getCats, function (req, res) {
-    res.render('user/info');//ejs可以访问到req.session.x的内容
+    res.render('user/info');//ejs可以访问到res.locals.user的内容
 });
 
 module.exports = router;

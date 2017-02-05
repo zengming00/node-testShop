@@ -36,7 +36,7 @@
 					<li class="shop_pic">
 						<div class="promin_mainpic">
 							<div class="promin_mainpicn">
-								<a href="/goods?_id=<%=g.id%>" target="_blank"><img src="<%=g.img%>" border="0" /></a><br />
+								<a href="/goods?_id=<%=g.id%>" target="_blank"><img src="<%=g.img%>" border="0" style="width: auto"/></a><br />
 								<i></i>
 							</div>
 						</div>
@@ -45,14 +45,14 @@
 						<a href="/goods?_id=<%=g.id%>" target="_blank"><%=g.name%></a>
 					</li>
 					<li class="shop_nu">
-						<img src="/images/bag_close.gif" onclick="decrCart()" />
+						<a href="/flow/cartApi?a=decr&_id=<%=g.id%>"><img src="/images/bag_close.gif"/></a>
 						<input type="text" name="goods_number[44]" class="input_num" id="goods_number_44" value="<%=g.num%>" size="4" style="text-align:center" readonly="true" />
-						<img src="/images/bag_open.gif" onclick="addCart()" />
+						<a href="/flow/cartApi?a=incr&_id=<%=g.id%>"><img src="/images/bag_open.gif"/></a>
 					</li>
 					<li class="shop_much">￥<%=g.price%>元</li>
-					<li class="shop_sum">￥<%=g.price * g.num%>元</li>
+					<li class="shop_sum">￥<%=cart.floor(g.price * g.num)%>元</li>
 					<li class="shop_oper">
-						<a href="#" class="f6">删除</a>
+						<a href="/flow/cartApi?a=del&_id=<%=g.id%>" class="f6">删除</a>&nbsp;&nbsp;
 						<a href="#" class="f6">放入收藏夹</a>
 					</li>
 					<div class="clear"></div>
@@ -64,9 +64,8 @@
 				<div class="shop_bot">
 					<span class="left"></span>
 					<span class="right">
-					<input type="hidden" name="step" value="update_cart" />
 					<input type="button" value="继续购物" class="button_shop" style="cursor:pointer" onClick="location.href='/';">
-					<input type="button" value="开始结算" style="cursor:pointer" class="buttonredb" onClick="if (1==0) {alert('您还没有添加商品，无法进行结算。');return;}window.location.href='flow.php?step=checkout'">
+					<input type="button" value="提交订单" style="cursor:pointer" class="buttonredb" onClick="location.href='checkout'">
 				</span>
 					<span class="clear"></span>
 				</div>
