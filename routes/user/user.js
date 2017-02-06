@@ -6,6 +6,9 @@ var Z = require('zengming');
 var goodsModel = require('../../models/GoodsModel');
 var catModel = require('../../models/CatModel');
 var userModel = require('../../models/UserModel');
+var ordgoodsModel = require('../../models/OrdgoodsModel');
+var ordinfoModel = require('../../models/OrdinfoModel');
+
 var Comm = require('../../lib/Common');
 var Verify = require('../../lib/Verify');
 
@@ -152,7 +155,11 @@ router.get('/liuyan', getCats, function (req, res) {
 });
 
 router.get('/orderlist', getCats, function (req, res) {
-    res.render('user/orderlist');
+    ordinfoModel.find(function (err, docs) {
+        if(err) return res.send(err);
+        var data = {ords:docs};
+        res.render('user/orderlist', data);
+    });
 });
 
 router.all('/repwd', getCats, function (req, res) {

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="Keywords" content="" />
 <meta name="Description" content="" />
-<title>GSM手机_手机类型_ECSHOP演示站 - Powered by ECShop</title>
+	<title>商城演示站 - Powered by Node.js</title>
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" media="screen" />
@@ -59,16 +59,16 @@
 						<li class="shop_oper">操作</li>
 						<div class="clear"></div>
 					</ul>
-					
+<% ords.forEach(function (ord) { %>
                     <ul class="ulcollection">
-						<li class="shop_color"><a href="user.php?act=order_detail&order_id={$item.order_id}" class="f6">2011091208</a></li>
-						<li class="cart_much">2011-12-13</li>
-						<li class="cart_nu">2345</li>
-						<li class="shop_name">已支付,已发货</li>
+						<li class="shop_color"><a href="#" class="f6"><%=ord.ordId%></a></li>
+						<li class="cart_much"><%=toDateStr(ord._id.getTimestamp())%></li>
+						<li class="cart_nu"><%=ord.money%></li>
+						<li class="shop_name"><%= ord.payState ? '已支付,已发货' : '未支付'%></li>
 						<li class="shop_oper"><font class="f6">删除</font></li>
 						<div class="clear"></div>
 					</ul>
-
+<% }); %>
 					<div class="contno" style="overflow:hidden;height:30px;">
 
 					<div class="page">
@@ -77,9 +77,9 @@
 
 
  <div id="page" class="pagebar">
-  <span class="f_l f6" style="margin-right:10px;">总计 <b>0</b>  个记录</span>
+  <span class="f_l f6" style="margin-right:10px;">总计 <b><%=ords.length%></b>  个记录</span>
       
-      </div>
+ </div>
 
 </form>
 <script type="Text/Javascript" language="JavaScript">

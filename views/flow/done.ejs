@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="Keywords" content="" />
 	<meta name="Description" content="" />
-	<title>GSM手机_手机类型_ECSHOP演示站 - Powered by ECShop</title>
+	<title>商城演示站 - Powered by Node.js</title>
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	<link href="/css/member.css" rel="stylesheet" type="text/css" media="screen" />
@@ -20,12 +20,12 @@
 		<div class="shop">
 			<div class="shopend">
 				<div class="shopendsuc">
-					<h1>感谢您在本店购物！您的订单已提交成功，请记住您的订单号2011122598391</h1>
-					<h2></h2>
+					<h1>感谢您在本店购物！您的订单已提交成功</h1>
+					<h2>您的订单号是<%=ordId%></h2>
 				</div>
 				<div class="shopend_bg" style="padding-left:40px">
-					您的应付款金额为: <strong style="color:#ff0000">￥3025.00元</strong><br>
-					立即在线支付
+					您的应付款金额为: <strong style="color:#ff0000">￥<%=money%>元</strong><br>
+					<%-payForm%>
 				</div>
 				<div class="shopend_bg" style="padding-left:0px"><p style="text-align:center; margin-bottom:20px;">
 						您可以 <a href="/">返回首页</a> 或去 <a href="/user/info">用户中心</a></p>

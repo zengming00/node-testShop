@@ -120,7 +120,7 @@
 .promin_mainpicn img{width: expression(this.width > 80 && this.width/this.height > 1.3 ? 80 : true); height: expression(this.height >60 && this.width/this.height < 1.3 ? 60 : true);}
 
 .shop_name{line-height:18px;text-align:center;width:260px;margin-right:10px;padding-top:10px; padding-bottom:10px}
-.shop_color,.shop_nu,.shop_much,.shop_sum,.shop_oper{width:105px;}
+.shop_color,.shop_nu,.shop_much,.shop_sum,.shop_oper{width:105px;margin-left: 10px}
 .shop_nu{line-height:20px;}
 .input_num{width:30px;text-align:center;margin-top:20px;border:1px solid #c8c8c8;}
 .shop_bot{text-align:right;margin:10px 20px 0 0;}
