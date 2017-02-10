@@ -7,6 +7,8 @@ var Promise = require('bluebird');
 var catModel = require('../../models/CatModel');
 var goodsModel = require('../../models/GoodsModel');
 var userModel = require('../../models/UserModel');
+var ordinfoModel = require('../../models/OrdinfoModel');
+
 var Dirs = require('../../lib/Dirs');
 var Page = require('../../lib/Page.class');
 var Verify = require('../../lib/Verify');
@@ -225,6 +227,13 @@ router.get('/userlist', function (req, res) {
     })
 });
 
+router.get('/ordlist', function (req, res){
+    ordinfoModel.find({}, null, {sort:{_id:-1}}, function (err, docs) {
+        if(err) return res.send(err);
+        var data = {ords:docs};
+        res.render('admin/ordlist', data);
+    });
+});
 
 
 /*

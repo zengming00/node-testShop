@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ECSHOP 管理中心 - 订单列表 </title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/admin/styles/general.css" rel="stylesheet" type="text/css" />
+    <link href="/admin/styles/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<h1>
+    <span class="action-span1"><a href="javascript:void(0)">ECSHOP 管理中心</a> </span>
+    <span id="search_id" class="action-span1"> - 订单列表 </span>
+    <div style="clear:both"></div>
+</h1>
+<form method="post" action="" name="listForm">
+    <div class="list-div" id="listDiv">
+
+        <table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+            <tr>
+                <th>下单时间</th>
+                <th>订单号</th>
+                <th>购物金额</th>
+                <th>订单状态</th>
+                <th>收货地址</th>
+                <th>附言</th>
+            </tr>
+            <style>
+                tr{background: white;}
+                tr:hover{	background:#aaa; }
+                td{	background:inherit !important;  }
+            </style>
+<% ords.forEach(function(ord){ %>
+            <tr align="center" class="tree" id="0_1" id = 'tr_1'>
+                <td><%=toDateStr(ord._id.getTimestamp())%></td>
+                <td align="left" class="" style='font-weight: bold;padding-left: 2em'>
+                    <span><a href="javascript:void(0)" ><%=ord.ordId%></a></span>
+                </td>
+                <td align="right"><%=ord.money%></td>
+                <td><%=ord.payState ? '已支付,已发货' : '未支付'%></td>
+                <td><%=ord.address%></td>
+                <td><%=ord.fuyan%></td>
+            </tr>
+<% }) %>
+        </table>
+    </div>
+</form>
+
+<div id="footer">
+    本站使用Node.js + express + mongodb 提供强劲动力<br />
+    版权所有 &copy; 2010-2017 zengming QQ:243786753，并保留所有权利。
+</div>
+</body>
+</html>

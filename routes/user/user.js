@@ -154,11 +154,11 @@ router.get('/liuyan', getCats, function (req, res) {
     res.render('user/liuyan');
 });
 
-router.get('/orderlist', getCats, function (req, res) {
-    ordinfoModel.find(function (err, docs) {
+router.get('/ordlist', getCats, function (req, res) {
+    ordinfoModel.find({userId:req.session.user._id}, null, {sort:{_id:-1}}, function (err, docs) {
         if(err) return res.send(err);
         var data = {ords:docs};
-        res.render('user/orderlist', data);
+        res.render('user/ordlist', data);
     });
 });
 
