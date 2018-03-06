@@ -1,4 +1,7 @@
 # 使用Node.js技术制作的商城演示项目
+
+另一种实现：https://github.com/zengming00/go-server-js-testShop
+
 技术要点：
 
 > * linux下开发
